@@ -1,18 +1,79 @@
+{% extends "modelo.html"%}
+
 {% block content %}
 
-<h1>Form-Cliente</h1>
+<h1>Novo Cliente</h1>
 
 <form action="{{ url_for('resultado') }}" method="post">
 
-    <label for="nome">Nome
-        <input type="text" name="nome" id="nome" placeholder="Informe seu nome">
-    </label>
+    <h1 align="center">Novo Cliente</h1>
+    <table align="center">
+        <tr>
+            <td> Código: </td>
+            <td> Nome Cliente: </td>
+        </tr>
+        <tr>
+            <td> <input type="text" name="idCliente" id="idCliente" placeholder="ID Cliente" size="100"> </td>
+            <td> <input type="text" name="nomeCliente" id="nomeCliente" placeholder="Nome Cliente" size="100"></td>
+        </tr>
+        <td> Endereço: </td>
+        <td> Número: </td>
+        </tr>
+        <tr>
+            <td> <input type="text" name="enderecoCliente" id="enderecoCliente" size="100"> </td>
+            <td> <input type="text" name="numeroEndCliente" id="numeroEndCliente" size="100" </td>
+        </tr>
+    </table>
+    <table align="center">
+        <tr>
+            <td> Observação: </td>
+        </tr>
+        <tr>
+            <td> <input type="text" name="observacaoCliente" id="observacaoCliente" size="200"> </td>
+        </tr>
+    </table>
+    <table align="center">
+        <tr>
+            <td>CEP: </td>
+            <td>Bairro: </td>
+            <td>Cidade: </td>
+            <td>Estado: </td>
+        </tr>
+        <tr>
+            <td> <input type="text" name="cepCliente" id="cepCliente" size="8"> </td>
+            <td> <input type="text" name="bairroCliente" id="bairroCliente" size="50"></td>
+            <td> <input type="text" name="cidadeCliente" id="cidadeCliente" size="50"> </td>
+            <td> <select name="estadoCliente">
+                    <option value="estado">Estado</option>
+                </select></td>
+        </tr>
+    </table>
+    <table align="center">
+        <tr>
+            <td> Telefone: </td>
+            <td> Email:: </td>
+        </tr>
+        <tr>
+            <td> <input type="text" name="telefoneCliente" id="telefoneCliente" size="100"> </td>
+            <td> <input type="text" name="emailCliente" id="emailCliente" size="100"></td>
+    </table>
+    <table align="center">
+        <tr>
+            <td>Login: </td>
+            <td>Senha: </td>
+            <td>Grupo: </td>
+        </tr>
+        <tr>
+            <td> <input type="text" name="loginCliente" id="loginCliente" size="45"> </td>
+            <td> <input type="password" name="senhaCliente" id="bairroCliente" size="45"></td>
+            <td> <select name="GrupoCliente">
+                    <option value="grupo">Grupo</option>
+                </select></td>
+        </tr>
+    </table>
 
-    <label for="idade">Idade
-        <input type="text" name="idade" id="idade" placeholder="Informe sua idade">
-    </label>
     <br>
-    <button type="submit" class="btn btn-primary">Enviar</button>
+    <button type="submit" class="btn btn-primary">Salvar</button>
 
 </form>
 

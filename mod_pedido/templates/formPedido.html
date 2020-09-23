@@ -1,8 +1,90 @@
-{% extendes "modelo.html"%}
+{% extends "modelo.html"%}
 
 {% block title %} FormPedido {% endblock %}
 
 {% block content %}
-    <h1>Form-Pedido</h1>
-    <p class="important"> Pedidos </p>
-{% endblock%}
+<p class="important"> Produto </p>
+
+<form action="{{ url_for('resultado') }}" method="post">
+
+    <h1 align="center">NovoPedido</h1>
+    <table align="center">
+        <tr>
+            <td> Número do Pedido: </td>
+            <td> Nome do Cliente </td>
+            <td> Telefone: </td>
+            <td> Código do Cliente </td>
+        </tr>
+        <tr>
+            <td> <input type="text" name="idPedido" id="idPedido" size="50"> </td>
+            <td> <input type="text" name="nomeClientePedido" id="nomeClientePedido" size="50"></td>
+            <td> <input type="text" name="telefoneClientePedido" id="telefoneClientePedido" size="50"></td>
+            <td> <input type="text" name="codigoClientePedido" id="codigoClientePedido" size="100"></td>
+        </tr>
+    </table>
+    <table align="center">
+        <tr>
+            <td> Endereço: </td>
+            <td> Número </td>
+            <td> CEP: </td>
+            <td> Bairro </td>
+            <td> Cidade </td>
+        </tr>
+        <tr>
+            <td> <input type="text" name="enderecoPedido" id="enderecoPedido" size="70"> </td>
+            <td> <input type="text" name="numeroPedido" id="numeroClientePedido" size="20"></td>
+            <td> <input type="text" name="cepClientePedido" id="cepClientePedido" size="50"></td>
+            <td> <input type="text" name="bairroPedido" id="bairroClientePedido" size="50"></td>
+            <td> <input type="text" name="cidadePedido" id="cidadeClientePedido" size="50"></td>
+        </tr>
+    </table>
+    <br>
+    <label for="dataPedido"> Data/Hora
+        <br>
+        <input type="datetime-local" name="dataPedido" id="dataPedido">
+    </label>
+    <br>
+    <label for="dataPedido"> Data/Hora
+        <br>
+        <input type="text" name="observacaoPedido" id="observacaoPedido">
+    </label>
+    <table align="center">
+        <tr>
+            <td> Produto </td>
+            <td> Descrição</td>
+            <td> Preço </td>
+            <td> Quantidade </td>
+        </tr>
+        <tr>
+            <td> <input type="text" name="produtoPedido" id="produtoPedido" size="50"> </td>
+            <td> <input type="text" name="descricaoPedido" id="descricaoPedido" size="50"></td>
+            <td> <input type="text" name="precoPedido" id="precoPedido" size="50"></td>
+            <td> <input type="text" name="quantidadePedido" id="quantidadeClientePedido" size="50"></td>
+        </tr>
+    </table>
+    <table align="center">
+        <tr>
+            <td> Total R$ </td>
+            <td> Observações</td>
+        </tr>
+        <tr>
+            <td> <input type="text" name="totalPedido" id="totalPedido" size="50"> </td>
+            <td> <input type="text" name="obsPedido" id="obsPedido" size="50"></td>
+
+        </tr>
+    </table>
+    <br>
+    <button type="submit" class="btn btn-primary">Adicionar</button>
+    <button type="submit" class="btn btn-primary">Salvar</button>
+    <button type="submit" class="btn btn-primary">Excluir</button>
+    <table>
+        <tr>
+            <td> # </td>
+            <td> Descrição</td>
+            <td> Preço </td>
+            <td> Quantidade </td>
+            <td> Total </td>
+            <td> Observações </td>
+        </tr>
+    </table>
+    {% endblock%}

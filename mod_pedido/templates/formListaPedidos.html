@@ -1,8 +1,24 @@
-{% extendes "modelo.html"%}
+{% extends "modelo.html"%}
 
 {% block title %} FormlListaPedidos{% endblock %}
 
 {% block content %}
-    <h1>Form-ListaPedidos</h1>
+<button type="submit" class="btn btn-primary">Novo Pedido</button>
     <p class="important"> Lista Pedidos </p>
+
+    <table align="center">
+        <tr>
+            <td> # </td>
+            <td> Telefone </td>
+            <td> Cliente </td>
+            <td> Endereço </td>
+            <td> Número </td>
+            <td> CEP</td>
+            <td> Bairro </td>
+            <td> Cidade</td>
+            <td> Obs</td>
+            <td> Data/Hora</td>
+            <td> Produtos</td>
+        </tr>
+    </table>
 {% endblock%}
