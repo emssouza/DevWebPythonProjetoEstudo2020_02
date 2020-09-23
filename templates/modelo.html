@@ -1,28 +1,40 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-    <head>
-        {% block head %}
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>{% block title %}{% endblock %} - AbcBolinhas</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-4.5.2/css/bootstrap.min.css') }}">
+
+<head>
+    {% block head %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}{% endblock %} - AbcBolinhas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-4.5.2/css/bootstrap.min.css') }}">
+    {% endblock %}
+</head>
+
+<body>
+    <div class="container">
+        <ul>
+            <form id="menuClientes" action="{{ url_for('home.home') }}" method="POST">
+                <a href="javascript:;“ onclick=" document.getElementById('menuClientes').submit();">Home</a>
+            </form>
+            <form id="menuClientes" action="{{ url_for('cliente.formListaClientes') }}" method="POST">
+                <a href="javascript:;“ onclick=" document.getElementById('menuClientes').submit();">Clientes</a>
+            </form>
+            <form id="menuClientes" action="{{ url_for('pedido.formListaPedidos') }}" method="POST">
+                <a href="javascript:;“ onclick=" document.getElementById('menuClientes').submit();">Pedidos</a>
+            </form>
+            <form id="menuClientes" action="{{ url_for('produto.formListaProdutos') }}" method="POST">
+                <a href="javascript:;“ onclick=" document.getElementById('menuClientes').submit();">Produtos</a>
+            </form>
+        </ul>
+
+        {% block content %}{% endblock %}
+
+        {% block footer %}
+        &copy; Copyright 2020 by <a href="http://127.0.0.1:5000/">AbcBolinhas</a>.
         {% endblock %}
-    </head>
-    <body>
-        <div class="container">
-            <ul>
-                <form id="menuClientes" action="{{ url_for('cliente.formListaClientes') }}" method="POST">
-                <a href="javascript:;“ onclick="document.getElementById('menuClientes').submit();">Clientes</a>
-                </form>
-            </ul>
+    </div>
+    <script src="{{ url_for('static', filename='bootstrap-4.5.2/js/bootstrap.min.js') }}"></script>
+</body>
 
-            {% block content %}{% endblock %}
-
-            {% block footer %}
-            &copy; Copyright 2020 by <a href="http://127.0.0.1:5000/">AbcBolinhas</a>.
-            {% endblock %}
-        </div>
-        <script src="{{ url_for('static', filename='bootstrap-4.5.2/js/bootstrap.min.js') }}"></script>
-    </body>
 </html>

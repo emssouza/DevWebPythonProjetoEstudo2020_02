@@ -1,8 +1,26 @@
-{% extendes "modelo.html"%}
+{% extends "modelo.html"%}
 
 {% block title %} FormProduto{% endblock %}
 
 {% block content %}
-    <h1>Form-Produto</h1>
-    <p class="important"> Produto </p>
-{% endblock%}
+<p class="important"> Produto </p>
+
+<form action="{{ url_for('resultado') }}" method="post">
+
+    <h1 align="center">Novo Produto</h1>
+    <table align="center">
+        <tr>
+            <td> Código: </td>
+            <td> Descrição do Produto: </td>
+            <td> Valor:: </td>
+            <td> Imagem:: </td>
+        </tr>
+        <tr>
+            <td> <input type="text" name="idProduto" id="idProduto" placeholder="ID Produto" size="100"> </td>
+            <td> <input type="text" name="descricaoProduto" id="descricaoProduto" placeholder="Descrição do Produto" size="100"></td>
+            <td> <input type="text" name="valorProduto" id="valorProduto" size="100"> </td>
+            <td> <input type="file" name="imagemProduto" id="imagemProduto" placeholder="Nenhum Arquivo Selecionado" size="100"></td>
+        </tr>
+        <br>
+        <button type="submit" class="btn btn-primary">Salvar</button>
+        {% endblock%}

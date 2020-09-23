@@ -1,1 +1,27 @@
-html
+{% extends "modelo.html"%}
+
+{% block content %}
+
+<button type="submit" class="btn btn-primary">Novo Pedido</button>
+    <p class="important"> Lista Clientes </p>
+
+    <table align="center">
+        <tr>
+            <td> # </td>
+            <td> Nome </td>
+            <td> Endereço </td>
+            <td> Número </td>
+            <td> Obervação</td>
+            <td> CEP</td>
+            <td> Bairro</td>
+            <td> Cidade</td>
+            <td> Estado</td>
+            <td> Telefone</td>
+            <td> Email</td>
+            <td> Login</td>
+            <td> Senha</td>
+            <td> Grupo</td>
+        </tr>
+    </table>
+
+{% endblock %}

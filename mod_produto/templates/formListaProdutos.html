@@ -1,8 +1,17 @@
-{% extendes "modelo.html"%}
+{% extends "modelo.html"%}
 
 {% block title %} FormListaProdutos {% endblock %}
 
 {% block content %}
-    <h1>Form-ListaProdutos</h1>
+
     <p class="important"> Lista Produtos </p>
+    <button type="submit" class="btn btn-primary">Novo Produto</button>
+    <table align="center">
+        <tr>
+            <td> # </td>
+            <td> Descrição </td>
+            <td> Preço </td>
+            <td> Imagem </td>
+        </tr>
+    </table>
 {% endblock%}
