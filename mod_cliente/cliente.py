@@ -4,7 +4,7 @@ from flask import Blueprint, render_template, request
 
 bp_cliente = Blueprint('cliente', __name__, url_prefix='/cliente', template_folder='templates')
 
-@bp_cliente.route("/", methods=['GET', 'POST'])
+@bp_cliente.route("/", methods=['POST'])
 def formListaClientes():
     return render_template("formListaClientes.html")
 

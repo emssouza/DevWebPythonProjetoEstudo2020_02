@@ -1,1 +1,19 @@
-html
+{% block content %}
+
+<h1>Form-Cliente</h1>
+
+<form action="{{ url_for('resultado') }}" method="post">
+
+    <label for="nome">Nome
+        <input type="text" name="nome" id="nome" placeholder="Informe seu nome">
+    </label>
+
+    <label for="idade">Idade
+        <input type="text" name="idade" id="idade" placeholder="Informe sua idade">
+    </label>
+    <br>
+    <button type="submit" class="btn btn-primary">Enviar</button>
+
+</form>
+
+{% endblock %}
