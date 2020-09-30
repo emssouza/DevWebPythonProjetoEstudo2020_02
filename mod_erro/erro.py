@@ -1,13 +1,13 @@
-#coding: utf-8
+from flask import Blueprint, render_template
 
-from flask import Blueprint, render_template, request
+bp_erro = Blueprint('erro', __name__, template_folder='templates')
 
-bp_erro = Blueprint('erro', __name__, url_prefix='/erro', template_folder='templates')
 
-@bp_erro.route("/404")
+@bp_erro.app_errorhandler(404)
 def erro404(error):
-    return render_template("form404.html"), 404
+    return render_template("form404.html")
 
-@bp_erro.route("/500")
+
+@bp_erro.app_errorhandler(500)
 def erro500(error):
-    return render_template("form500.html"), 500
+    return render_template("form500.html")

@@ -14,17 +14,20 @@
 <body>
     <div class="container">
         <ul>
-            <form id="menuClientes" action="{{ url_for('home.home') }}" method="POST">
-                <a href="javascript:;“ onclick=" document.getElementById('menuClientes').submit();">Home</a>
+            <form id="menuHome" action="{{ url_for('home.home') }}" method="POST">
+                <a href="javascript:;" onclick=" document.getElementById('menuHome').submit();">Home</a>
             </form>
             <form id="menuClientes" action="{{ url_for('cliente.formListaClientes') }}" method="POST">
-                <a href="javascript:;“ onclick=" document.getElementById('menuClientes').submit();">Clientes</a>
+                <a href="javascript:;" onclick=" document.getElementById('menuClientes').submit();">Clientes</a>
             </form>
-            <form id="menuClientes" action="{{ url_for('pedido.formListaPedidos') }}" method="POST">
-                <a href="javascript:;“ onclick=" document.getElementById('menuClientes').submit();">Pedidos</a>
+            <form id="menuPedidos" action="{{ url_for('pedido.formListaPedidos') }}" method="POST">
+                <a href="javascript:;" onclick=" document.getElementById('menuPedidos').submit();">Pedidos</a>
             </form>
-            <form id="menuClientes" action="{{ url_for('produto.formListaProdutos') }}" method="POST">
-                <a href="javascript:;“ onclick=" document.getElementById('menuClientes').submit();">Produtos</a>
+            <form id="menuProdutos" action="{{ url_for('produto.formListaProdutos') }}" method="POST">
+                <a href="javascript:;" onclick=" document.getElementById('menuProdutos').submit();">Produtos</a>
+            </form>
+            <form id="menulogout" action="{{ url_for('login.logout') }}" method="POST">
+                <a href="javascript:;" onclick=" document.getElementById('menulogout').submit();">Sair</a>
             </form>
         </ul>
 

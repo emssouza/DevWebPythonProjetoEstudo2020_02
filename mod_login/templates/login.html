@@ -1,0 +1,31 @@
+{% extends "modelo.html"%}
+
+{% block title %} Login{% endblock %}
+
+{% block content %}
+    <form action="{{ url_for('login.validaLogin') }}" method="post">
+        <h1>Login</h1>
+
+        <label for="usuario">Usuário</label>
+        <input id="usuario" name="usuario" required="required" type="text" placeholder="Usuário" />
+        </p>
+
+        <p>
+            <label for="senha">Sua senha</label>
+            <input id="senha" name="senha" required="required" type="password" placeholder="Senha" />
+        </p>
+
+        <p>
+            <button type="submit" class="btn btn-primary">Entrar</button>
+        </p>
+    </form>
+    {% if request.args.get('falhaSessao') == '1': %}
+    <div class="row">
+        <div class="col col-12">
+            <div class="alert alert-danger" role="alert">
+                Falha de Sessão! Realize seu login!
+            </div>
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}

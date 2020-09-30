@@ -5,4 +5,7 @@
 {% block content %}
     <h1>FormHome</h1>
     <p class="important"> HOME </p>
+    {% if 'usuario' in session %}
+        Bem-vindo <b>{{ session['usuario'] }}</b>
+    {% endif %}
 {% endblock%}

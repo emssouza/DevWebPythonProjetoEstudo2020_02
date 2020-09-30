@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=F:\webPythonProjetoEstudo2020_02
+set VIRTUAL_ENV=C:\Users\coelho\Downloads\Eliza Souza webPythonProjetoEstudo2020_02\webPythonProjetoEstudo2020_02
 
 if not defined PROMPT set PROMPT=$P$G
 
