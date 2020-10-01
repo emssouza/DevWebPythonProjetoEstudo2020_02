@@ -20,8 +20,9 @@ app.secret_key= os.urandom(12).hex()
 @app.before_request
 def before_request():
     session.permanent = True
-    app.permanent_session_lifetime = timedelta(minutes=20)
+    app.permanent_session_lifetime = timedelta(minutes=1)
 
+app.register_blueprint(bp_login)
 app.register_blueprint(bp_cliente)
 app.register_blueprint(bp_erro)
 app.register_blueprint(bp_home)

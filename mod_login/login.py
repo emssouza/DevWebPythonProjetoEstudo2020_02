@@ -3,11 +3,11 @@
 from flask import Blueprint, render_template, request,  redirect, url_for, session
 from functools import wraps
 
-bp_login = Blueprint('login', __name__, template_folder='templates')
+bp_login = Blueprint('login', __name__, url_prefix='/', template_folder='templates')
 
 @bp_login.route ("/", methods=['GET', 'POST'])
 def login():
-    return render_template("login.html")
+    return render_template("formLogin.html")
 
 @bp_login.route ("/login", methods=['GET', 'POST'])
 def validaLogin():
@@ -23,7 +23,7 @@ def validaLogin():
         # retorna para a tela de login
         return redirect(url_for('login.login', falhaLogin=1))
 
-@bp_login.route ("/logout")
+@bp_login.route ("/logout", methods=['GET', 'POST'])
 def logout():
     session.pop('usuario',None)
     session.clear()

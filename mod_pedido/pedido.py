@@ -3,8 +3,7 @@
 from flask import Blueprint, render_template, request
 from mod_login.login import validaSessao
 
-bp_pedido = Blueprint('pedido', __name__,
-                      url_prefix='/pedido', template_folder='templates')
+bp_pedido = Blueprint('pedido', __name__, url_prefix='/pedido', template_folder='templates')
 
 
 @bp_pedido.route("/", methods=['GET', 'POST'])
