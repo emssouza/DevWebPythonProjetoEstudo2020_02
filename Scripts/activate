@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="F:\webPythonProjetoEstudo2020_02"
+VIRTUAL_ENV="C:\Users\coelho\Downloads\Eliza Souza webPythonProjetoEstudo2020_02\webPythonProjetoEstudo2020_02"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

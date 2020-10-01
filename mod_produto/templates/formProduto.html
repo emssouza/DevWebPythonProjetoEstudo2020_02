@@ -5,7 +5,7 @@
 {% block content %}
 <p class="important"> Produto </p>
 
-<form action="{{ url_for('resultado') }}" method="post">
+<form action="{{ url_for('produto.formProduto') }}" method="post">
 
     <h1 align="center">Novo Produto</h1>
     <table align="center">
@@ -17,10 +17,14 @@
         </tr>
         <tr>
             <td> <input type="text" name="idProduto" id="idProduto" placeholder="ID Produto" size="100"> </td>
-            <td> <input type="text" name="descricaoProduto" id="descricaoProduto" placeholder="Descrição do Produto" size="100"></td>
+            <td> <input type="text" name="descricaoProduto" id="descricaoProduto" placeholder="Descrição do Produto"
+                    size="100"></td>
             <td> <input type="text" name="valorProduto" id="valorProduto" size="100"> </td>
-            <td> <input type="file" name="imagemProduto" id="imagemProduto" placeholder="Nenhum Arquivo Selecionado" size="100"></td>
+            <td> <input type="file" name="imagemProduto" id="imagemProduto" placeholder="Nenhum Arquivo Selecionado"
+                    size="100"></td>
         </tr>
-        <br>
-        <button type="submit" class="btn btn-primary">Salvar</button>
-        {% endblock%}
+    </table>
+    <br>
+    <button type="submit" class="btn btn-primary">Salvar</button>
+</form>
+{% endblock%}
