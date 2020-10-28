@@ -2,79 +2,126 @@
 
 {% block content %}
 
+{% if cliente.id_cliente == 0 %}
 <h1>Novo Cliente</h1>
+<form name="cliente" method="POST" action="{{ url_for('cliente.addCliente') }}">
+    {% else %}
+    <h1>Editar Cliente: {{ cliente.id_cliente }}</h1>
+    <form name="cliente" method="POST" action="{{ url_for('cliente.editCliente') }}">
+        {% endif %}
+        <div class="row">
+            <div class="col-md-2 mb-2">
+                <label for="id_cliente">Código:</label>
+                <input readonly value="{{ cliente.id_cliente }}" type="text" name="id_cliente" id="id_cliente"
+                    class="form-control" placeholder="ID" required>
+            </div>
 
-<form action="{{ url_for('cliente.formCliente') }}" method="post">
+            <div class="col-md-8 mb-2">
+                <label for="nome">Nome Cliente:</label>
+                <input value="{{ cliente.nome }}" type="text" name="nome" id="nome" autofocus class="form-control"
+                    required size="100">
+            </div>
+        </div>
 
-    <h1 align="center">Novo Cliente</h1>
-    <table align="center">
-        <tr>
-            <td> Código: </td>
-            <td> Nome Cliente: </td>
-        </tr>
-        <tr>
-            <td> <input type="text" name="idCliente" id="idCliente" placeholder="ID Cliente" size="100"> </td>
-            <td> <input type="text" name="nomeCliente" id="nomeCliente" placeholder="Nome Cliente" size="100"></td>
-        </tr>
-        <td> Endereço: </td>
-        <td> Número: </td>
-        </tr>
-        <tr>
-            <td> <input type="text" name="enderecoCliente" id="enderecoCliente" size="100"> </td>
-            <td> <input type="text" name="numeroEndCliente" id="numeroEndCliente" size="100" </td>
-        </tr>
-    </table>
-    <table align="center">
-        <tr>
-            <td> Observação: </td>
-        </tr>
-        <tr>
-            <td> <input type="text" name="observacaoCliente" id="observacaoCliente" size="200"> </td>
-        </tr>
-    </table>
-    <table align="center">
-        <tr>
-            <td>CEP: </td>
-            <td>Bairro: </td>
-            <td>Cidade: </td>
-            <td>Estado: </td>
-        </tr>
-        <tr>
-            <td> <input type="text" name="cepCliente" id="cepCliente" size="8"> </td>
-            <td> <input type="text" name="bairroCliente" id="bairroCliente" size="50"></td>
-            <td> <input type="text" name="cidadeCliente" id="cidadeCliente" size="50"> </td>
-            <td> <select name="estadoCliente">
-                    <option value="estado">Estado</option>
-                </select></td>
-        </tr>
-    </table>
-    <table align="center">
-        <tr>
-            <td> Telefone: </td>
-            <td> Email:: </td>
-        </tr>
-        <tr>
-            <td> <input type="text" name="telefoneCliente" id="telefoneCliente" size="100"> </td>
-            <td> <input type="text" name="emailCliente" id="emailCliente" size="100"></td>
-    </table>
-    <table align="center">
-        <tr>
-            <td>Login: </td>
-            <td>Senha: </td>
-            <td>Grupo: </td>
-        </tr>
-        <tr>
-            <td> <input type="text" name="loginCliente" id="loginCliente" size="45"> </td>
-            <td> <input type="password" name="senhaCliente" id="bairroCliente" size="45"></td>
-            <td> <select name="GrupoCliente">
-                    <option value="grupo">Grupo</option>
-                </select></td>
-        </tr>
-    </table>
+        <div class="row">
+            <div class="col-md-8 mb-2">
+                <label for="endereco">Endereço:</label>
+                <input value="{{ cliente.endereco }}" type="text" name="endereco" id="endereco" class="form-control" size="150">
+            </div>
 
-    <br>
-    <button type="submit" class="btn btn-primary">Salvar</button>
+            <div class="col-md-2 mb-2">
+                <label for="numero">Número:</label>
+                <input value="{{ cliente.numero }}" type="text" name="numero" id="numero" class="form-control">
+            </div>
+        </div>
 
-</form>
+        <div class="row">
+            <div class="col-md-10 mb-2">
+                <label for="observacao">Observações:</label>
+                <input value="{{ cliente.observacao }}" type="text" name="observacao" id="observacao"
+                    class="form-control" size="200">
+            </div>
+        </div>
 
-{% endblock %}
+        <div class="row">
+            <div class="col-md-2 mb-2">
+                <label for="cep">CEP:</label>
+                <input value="{{ cliente.cep }}" type="text" name="cep" id="cep" class="form-control" size="8">
+            </div>
+
+            <div class="col-md-3 mb-2">
+                <label for="bairro">Bairro:</label>
+                <input value="{{ cliente.bairro }} " type="text" name="bairro" id="bairro" class="form-control" size="50">
+            </div>
+
+            <div class="col-md-3 mb-2">
+                <label for="cidade">Cidade:</label>
+                <input value="{{ cliente.cidade }}" type="text" name="cidade" id="cidade" class="form-control" size="50">
+            </div>
+
+
+            <div class="col-md-2 mb-2">
+                <label for="estado">Estado:</label>
+                <select name="estado" id="estado" class="form-control">
+                    <option>SC</option>
+                    <option selected>{{ cliente.estado }}</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4 mb-2">
+                <label for="telefone">Telefone:</label>
+                <input value="{{ cliente.telefone }}" type="text" name="telefone" id="telefone" class="form-control" required size="11">
+            </div>
+
+            <div class="col-md-6 mb-2">
+                <label for="email">Email:</label>
+                <input value="{{ cliente.email }}" type="email" name="email" id="email" class="form-control" required size="100">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3 mb-2">
+                <label for="login">Login:</label>
+                <input value="{{ cliente.login }}" type="text" name="login" id="login" class="form-control" required size="11">
+            </div>
+
+            <div class="col-md-4 mb-2">
+                <label for="senha">Senha:</label>
+                <input value="{{ cliente.senha }}" type="password" name="senha" id="senha" class="form-control" required>
+            </div>
+
+            <div class="col-md-3 mb-2">
+                <label for="grupo">Grupo:</label>
+                <select name="grupo" id="grupo" class="form-control" required>
+                    <option>Admin</option>
+                    <option>Funcionário</option>
+                    <option selected>{{ cliente.grupo }}</option>
+                </select>
+            </div>
+
+        </div>
+        {% if cliente.id_cliente == 0 %}
+        <div class="for-row">
+            <div class="col">
+                <button type="submit" class="btn btn-primary" name="salvaInsertCliente" id="salvaInsertCliente"><i
+                        class="fas fa-save"></i>Salvar</a></button>
+            </div>
+        </div>
+        {% else %}
+        <div class="for-row">
+            <div class="col">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary" name="salvaEditaCliente" id="salvaEditaCliente"><i
+                        class="fas fa-save"></i>Salvar Edição</a></button>
+                    <button formnovalidate type="submit" class="btn btn-danger" name="salvaExcluiCliente" id="salvaExcluiCliente"><i
+                        class="far fa-trash-alt"></i>Excluir</a></button>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+    </form>
+
+    {% endblock %}

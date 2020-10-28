@@ -1,30 +1,46 @@
 {% extends "modelo.html"%}
 
-{% block title %} FormProduto{% endblock %}
-
 {% block content %}
-<p class="important"> Produto </p>
+<form name="produto" class="formProduto" action="{{ url_for('produto.formProduto') }}" method="post">
+    <div class="col-md-8 order-md-1">
+        <h4 class="mb-3">Novo Produto</h4>   
 
-<form action="{{ url_for('produto.formProduto') }}" method="post">
+        <div class="row">
+            <div class="col-md-8 mb-2">
+                <label for="id_produto">Produto:</label>
+                <input readonly value="" type="text" name="id_produto"  id="id_produto" 
+                class="form-control" placeholder="ID"  required>  
+            </div>
+        </div>
 
-    <h1 align="center">Novo Produto</h1>
-    <table align="center">
-        <tr>
-            <td> Código: </td>
-            <td> Descrição do Produto: </td>
-            <td> Valor:: </td>
-            <td> Imagem:: </td>
-        </tr>
-        <tr>
-            <td> <input type="text" name="idProduto" id="idProduto" placeholder="ID Produto" size="100"> </td>
-            <td> <input type="text" name="descricaoProduto" id="descricaoProduto" placeholder="Descrição do Produto"
-                    size="100"></td>
-            <td> <input type="text" name="valorProduto" id="valorProduto" size="100"> </td>
-            <td> <input type="file" name="imagemProduto" id="imagemProduto" placeholder="Nenhum Arquivo Selecionado"
-                    size="100"></td>
-        </tr>
-    </table>
-    <br>
-    <button type="submit" class="btn btn-primary">Salvar</button>
+        <div class="row">
+            <div class="col-md-8 mb-2">
+                <label for="descricao">Descrição do Produto:</label>
+                <input value="" type="text" name="descricao"  id="descricao" 
+                class="form-control" placeholder="Descrição do Produto" autofocus required>  
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 mb-2">
+                <label for="valor">Valor:</label>
+                <input value="" type="text" name="valor"  id="valor" 
+                class="form-control" autofocus required>  
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 mb-2">
+                <label for="imagem">Imagem:</label>
+                <input value="" type="file" name="imagem"  id="imagem" 
+                class="form-control" autofocus required>  
+            </div>
+        </div>
+              
+        <button type="submit" class="btn btn-primary><a id="btnSalvaNovoProduto" href=""><i class="fa fa-fw fa-save"></i>Salvar</a></button>    
+
+    </div>
+    
 </form>
+
 {% endblock%}

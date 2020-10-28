@@ -2,30 +2,42 @@
 
 {% block title %} Login{% endblock %}
 
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/formLogin.css') }}" />
+{% endblock %}
+
 {% block content %}
-    <form action="{{ url_for('login.validaLogin') }}" method="post">
-        <h1>Login</h1>
+<a class="links" id="paracadastro"></a>
+<a class="links" id="paralogin"></a>
+<form action="{{ url_for('login.validaLogin') }}" method="post">
+    <h1>Abc Bolinhas</h1>
 
-        <label for="usuario">Usuário</label>
-        <input  id="usuario" name="usuario" required="required" type="text" placeholder="Usuário" />
-        </p>
+<p>
+            <label for="usuario">Usuário</label>
+            <input id="usuario" name="usuario" required="required" type="text" placeholder="Usuário"
+            class="form-control"  required >  
 
-        <p>
+</p>
+<p>
             <label for="senha">Sua senha</label>
-            <input  id="senha" name="senha" required="required" type="password" placeholder="Senha" />
-        </p>
+        <input id="senha" name="senha" required="required" type="password" placeholder="Senha"
+            class="form-control"  required>  
+</p>
+<p>
 
-        <p>
-            <button type="submit" class="btn btn-primary">Entrar</button>
-        </p>
-    </form>
-    {% if request.args.get('falhaSessao') == '1': %}
-    <div class="row">
-        <div class="col col-12">
-            <div class="alert alert-danger" role="alert">
-                Falha de Sessão! Realize seu login!
-            </div>
+            <input type="submit" value="Entrar"
+            class="form-control"  required>  
+</p>
+
+</form>
+{% if request.args.get('falhaSessao') == '1': %}
+<div class="row">
+    <div class="col col-12">
+        <div class="alert alert-danger" role="alert">
+            Falha de Sessão! Realize seu login!
         </div>
     </div>
-    {% endif %}
+</div>
+{% endif %}
 {% endblock %}

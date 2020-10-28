@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    {% block head %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}{% endblock %} - AbcBolinhas</title>
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='bootstrap-4.5.2/bootstrap-4.5.2-dist/css/bootstrap.min.css') }}">
+    {% endblock %}
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row menubar navibar">
+            <!-- HOME BUTTON -->
+            <div class="home col-md-1 navibutton">
+                <form id="menuHome" action="{{ url_for('home.home') }}" method="POST">
+                    <a href="javascript:;" onclick=" document.getElementById('menuHome').submit();">
+                        <img src="media_files/home.svg" class="center-block">
+                        <h6 class="text-center">INÍCIO <span class="caret"></span></h6>
+                    </a>
+                </form>
+            </div>
+            <!-- CLIENTS BUTTON -->
+            <div class="col-md-1 navibutton">
+                <form id="menuClientes" action="{{ url_for('cliente.formListaClientes') }}" method="POST">
+                    <a href="javascript:;" onclick=" document.getElementById('menuClientes').submit();">
+                        <img src="media_files/teste.png" class="center-block">
+                        <h6 class="text-center">CLIENTES <span class="caret"></span></h6>
+                    </a>
+                </form>
+            </div>
+            <!-- ATTENDANCE BUTTON -->
+            <div class="col-md-1 navibutton">
+                <div class="flipdown">
+                    <a href="attendance.php" class="attendance flipbtn">
+                        <img src="Images/attendance.png" class="center-block">
+                        <h6 class="text-center">ATTENDANCE<span class="caret"
+                                style="position:absolute; right:-1px; bottom:19px"></span></h6>
+                    </a>
+                    <div class="flipdown-menu">
+                        <a href="holidaypay.php">Holiday attendance</a>
+                        <a href="sundaypay.php">Sunday attendance</a>
+                    </div>
+                </div>
+            </div>
+            <!-- PAYROLL BUTTON -->
+            <div class="col-md-1 navibutton">
+                <a href="regularpayroll.php" class="payroll">
+                    <img src="Images/cash-pay.png" class="center-block">
+                    <h6 class="text-center">PAYROLL</h6>
+                </a>
+            </div>
+            <!-- REPORTS BUTTON -->
+            <div class="col-md-1 navibutton">
+                <a href="reports.php" class="reports">
+                    <img src="Images/tax.png" class="center-block">
+                    <h6 class="text-center">REPORTS</h6>
+                </a>
+            </div>
+            <!-- OPTIONS BUTTON-->
+            <div class="col-md-1 navibutton">
+                <a href="options.php" class="adminOptions">
+                    <span>
+                        <img src="Images/admin-with-cogwheels.png" class="center-block">
+                        <h6 class="text-center">OPTIONS</h6>
+                    </span>
+                </a>
+            </div>
+            <!-- LOGOUT BUTTON -->
+            <div class="col-md-1 navibutton">
+                <a href="logout.php" class="">
+                    <span>
+                        <img src="Images/power-button-symbol.png" class="center-block">
+                        <h6 class="text-center">LOGOUT</h6>
+                    </span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='bootstrap-4.5.2/bootstrap-4.5.2-dist/js/bootstrap.min.js') }}"></script>
+</body>
+
+</html>

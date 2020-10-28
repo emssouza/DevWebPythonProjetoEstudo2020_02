@@ -2,6 +2,8 @@
 
 from flask import Blueprint, render_template, request,  redirect, url_for, session
 from functools import wraps
+from mod_cliente.clienteBD import Clientes
+import hashlib
 
 bp_login = Blueprint('login', __name__, url_prefix='/', template_folder='templates')
 
@@ -9,21 +11,32 @@ bp_login = Blueprint('login', __name__, url_prefix='/', template_folder='templat
 def login():
     return render_template("formLogin.html")
 
-@bp_login.route ("/login", methods=['GET', 'POST'])
+@bp_login.route("/login", methods=['POST'])
 def validaLogin():
-    _name = request.form['usuario']
-    _pass = request.form['senha']
-    if _name == "abc" and _pass == "Bolinhas":
-        # abre a aplicação na tela home
+    # cria o objeto e armazena o usuario e senha digitado
+    cliente = Clientes()
+    cliente.login = request.form['usuario'] 
+    cliente.senha = hashlib.sha3_256( request.form['senha'].encode('utf-8') ).hexdigest()
+
+    # realiza a busca pelo usuario e armazena o resultado no objeto
+    cliente.selectLogin()
+
+    # verifica se usuario foi encontrado
+    if cliente.id_cliente > 0:
+        # limpa a sessão
         session.clear()
-        # registra ‘usuario’ na sessão, armazenando o login do usuário
-        session['usuario'] = _name
+        # registra usuario na sessão, armazenando o login do usuário
+        session['usuario'] = cliente.nome
+        session['login'] = cliente.login
+        session['grupo'] = cliente.grupo
+
+        # abre a aplicação na tela home
         return redirect(url_for('home.home'))
     else:
         # retorna para a tela de login
         return redirect(url_for('login.login', falhaLogin=1))
 
-@bp_login.route ("/logout", methods=['GET', 'POST'])
+@bp_login.route ("/logout", methods=['POST'])
 def logout():
     session.pop('usuario',None)
     session.clear()

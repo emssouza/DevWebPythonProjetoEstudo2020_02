@@ -3,27 +3,58 @@
 {% block content %}
 
 <form action="{{ url_for('cliente.formCliente') }}" method="post">
-    <button type="submit" class="btn btn-primary">Novo Pedido</button>
-    <p class="important"> Lista Clientes </p>
+    <button type="submit" class="btn btn-primary">Novo Cliente</button>
+    <h1><p class="important"> Lista Clientes </p></h1>
 
     <table align="center">
-        <tr>
-            <td> # </td>
-            <td> Nome </td>
-            <td> Endereço </td>
-            <td> Número </td>
-            <td> Obervação</td>
-            <td> CEP</td>
-            <td> Bairro</td>
-            <td> Cidade</td>
-            <td> Estado</td>
-            <td> Telefone</td>
-            <td> Email</td>
-            <td> Login</td>
-            <td> Senha</td>
-            <td> Grupo</td>
-        </tr>
+        <thead>
+            <tr>
+                <th scope="row"> # </th>
+                <th scope="row"> Nome </th>
+                <th scope="row"> Endereço </th>
+                <th scope="row"> Número </th>
+                <th scope="row"> Obervação</th>
+                <th scope="row"> CEP</th>
+                <th scope="row"> Bairro</th>
+                <th scope="row"> Cidade</th>
+                <th scope="row"> Estado</th>
+                <th scope="row"> Telefone</th>
+                <th scope="row"> Email</th>
+                <th scope="row"> Login</th>
+                <th scope="row"> Senha</th>
+                <th scope="row"> Grupo</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% if result %}
+            {% for row in result %}
+            <tr>
+                <th scope='row'> {{ row[0] }}</th>
+                <td> {{ row[1] }}</td>
+                <td> {{ row[2] }}</td>
+                <td> {{ row[3] }}</td>
+                <td> {{ row[4] }}</td>
+                <td> {{ row[5] }}</td>
+                <td> {{ row[6] }}</td>
+                <td> {{ row[7] }}</td>
+                <td> {{ row[8] }}</td>
+                <td> {{ row[9] }}</td>
+                <td> {{ row[10] }}</td>
+                <td> {{ row[11] }}</td>
+                <td> {{ row[12] }}</td>
+                <td> {{ row[13] }}</td>
+                <td>
+                    <form action='{{ url_for("cliente.formEditCliente") }}' method='POST' name='editUsuario'>
+                        <input type='hidden' name='id_cliente' value='{{ row[0] }}'>
+                        <button type='submit' name='formEditCliente'><i class='fas fa-edit'></i></button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+            {% endif %}
+        </tbody>
     </table>
 </form>
 
-    {% endblock %}
+{% endblock %}

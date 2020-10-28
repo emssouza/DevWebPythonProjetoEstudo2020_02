@@ -1,11 +1,17 @@
-{% extends "modelo.html"%}
+{% extends "modelo.html" %}
 
-{% block title %} FormHome{% endblock %}
+{% block title %}HOME{% endblock %}
 
 {% block content %}
-    <h1>FormHome</h1>
-    <p class="important"> HOME </p>
+
+<div class="container mt-5">
+    <h1>Abc Bolinhas</h1>
+    
     {% if 'usuario' in session %}
-        Bem-vindo <b>{{ session['usuario'] }}</b>
+    Bem-vindo <b>{{ session['usuario'] }}</b>
+    <br>
+    Grupo <b>{{ session['grupo'] }}</b>
     {% endif %}
-{% endblock%}
+</div>
+
+{% endblock %}
