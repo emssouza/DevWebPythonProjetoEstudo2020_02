@@ -1,0 +1,125 @@
+/* NAVIGATION BAR */
+.menubar
+{
+  background-color: #0b0968;
+  height: 100px;
+}
+.center-block
+{
+  height: 40px !important;
+  width: 40px !important;
+}
+@media (min-width: 768) {
+.navibar .col-md-1,
+  .navibar .col-sm-1,
+  .navibar .col-lg-1 {
+    width: 14.285714285714285714285714285714%;
+    *width: 14.285714285714285714285714285714%;
+    padding-top: 15px;
+  }
+}
+
+@media (min-width: 992px) {
+.navibar .col-md-1,
+  .navibar .col-sm-1,
+  .navibar .col-lg-1 {
+    width: 14.285714285714285714285714285714%;
+    *width: 14.285714285714285714285714285714%;
+    padding-top: 15px;
+  }
+}
+
+@media (min-width: 1200px) {
+.navibar .col-md-1,
+  .navibar .col-sm-1,
+  .navibar .col-lg-1 {
+    width: 14.285714285714285714285714285714%;
+    *width: 14.285714285714285714285714285714%;
+    padding-top: 15px;
+  }
+}
+
+/* DROPDOWN MENU */
+.flipdown
+{
+  overflow: hidden;
+}
+
+.flipdown .flipbtn
+{
+    font-size: 16px;    
+    border: none;
+    outline: none;
+    color: black;
+    background-color: inherit;
+}
+
+.navibutton:hover
+{
+  background-color: #110955;
+}
+
+.navibutton a:hover
+{
+  text-decoration: none;
+  color: white;
+}
+.onfocus
+{
+  background-color: #0a0252;
+}
+
+/* DROPDOWN CONTENTS */
+.flipdown-menu
+{
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    left:0px;
+    min-width: 183px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.flipdown-menu a
+{
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.flipdown-menu a:hover
+{
+      background-color: #072547;
+      color:white;
+}
+
+.flipdown:hover .flipdown-menu
+{
+  display:block;
+}
+
+/*--------------------------------*/
+@keyframes bounce
+{
+    1%{bottom:0;}
+    20%  {bottom:-3px;}
+    50%  {bottom:0px;}
+    70%  {bottom:0px;}
+    100% {bottom:0px;}
+}
+.navibutton:hover
+{ 
+  transition: 1s; 
+  animation-name: bounce;
+  animation-duration: 1.5s;
+}
+h6
+{
+  font-family: Quicksand;
+  font-size: 1.5em !important;
+  color: white;
+}

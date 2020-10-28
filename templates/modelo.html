@@ -7,36 +7,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{% block title %}{% endblock %} - AbcBolinhas</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-4.5.2/bootstrap-4.5.2-dist/css/bootstrap.min.css') }}">
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='bootstrap-4.5.2/bootstrap-4.5.2-dist/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/modelo.css') }}" />
     {% endblock %}
 </head>
 
 <body>
-    <div class="container">
-        <ul>
-            <form id="menuHome" action="{{ url_for('home.home') }}" method="POST">
-                <a href="javascript:;" onclick=" document.getElementById('menuHome').submit();">Home</a>
-            </form>
-            <form id="menuClientes" action="{{ url_for('cliente.formListaClientes') }}" method="POST">
-                <a href="javascript:;" onclick=" document.getElementById('menuClientes').submit();">Clientes</a>
-            </form>
-            <form id="menuPedidos" action="{{ url_for('pedido.formListaPedidos') }}" method="POST">
-                <a href="javascript:;" onclick=" document.getElementById('menuPedidos').submit();">Pedidos</a>
-            </form>
-            <form id="menuProdutos" action="{{ url_for('produto.formListaProdutos') }}" method="POST">
-                <a href="javascript:;" onclick=" document.getElementById('menuProdutos').submit();">Produtos</a>
-            </form>
-            <form id="menulogout" action="{{ url_for('login.logout') }}" method="POST">
-                <a href="javascript:;" onclick=" document.getElementById('menulogout').submit();">Sair</a>
-            </form>
-        </ul>
-
+    <div class="container-fluid">
+        <div class="row menubar navibar">
+            <!-- HOME -->
+            <div class="home col-md-2 navibutton">
+                <form id="menuHome" action="{{ url_for('home.home') }}" method="POST">
+                    <a href="javascript:;" onclick=" document.getElementById('menuHome').submit();">
+                        <img src="media_files/home.svg" class="center-block">
+                        <h6 class="text-center">INÍCIO <span class="caret"></span></h6>
+                    </a>
+                </form>
+            </div>
+            <!-- CLIENTES -->
+            <div class="col-md-2 navibutton">
+                <form id="menuClientes" action="{{ url_for('cliente.formListaClientes') }}" method="POST">
+                    <a href="javascript:;" onclick=" document.getElementById('menuClientes').submit();">
+                        <img src="media_files/teste.png" class="center-block">
+                        <h6 class="text-center">CLIENTES <span class="caret"></span></h6>
+                    </a>
+                </form>
+            </div>
+            <!-- PEDIDOS -->
+            <div class="col-md-2 navibutton">
+                <form id="menuPedidos" action="{{ url_for('pedido.formListaPedidos') }}" method="POST">
+                    <a href="javascript:;" onclick=" document.getElementById('menuPedidos').submit();">
+                        <img src="media_files/teste.png" class="center-block">
+                        <h6 class="text-center">PEDIDOS<span class="caret"
+                                style="position:absolute; right:-1px; bottom:19px"></span></h6>
+                    </a>
+                </form>
+            </div>
+            <!-- PRODUTOS -->
+            <div class="col-md-2 navibutton">
+                <form id="menuProdutos" action="{{ url_for('produto.formListaProdutos') }}" method="POST">
+                    <a href="javascript:;" onclick=" document.getElementById('menuProdutos').submit();">
+                        <img src="media_files/teste.png" class="center-block">
+                        <h6 class="text-center">PRODUTOS</h6></a>
+                </form>
+            </div>
+            <!-- LOGOUT -->
+            <div class="col-md-2 navibutton">
+                <form id="menulogout" action="{{ url_for('login.logout') }}" method="POST">
+                    <a href="javascript:;" onclick=" document.getElementById('menulogout').submit();">
+                        <span>
+                            <img src="media_files/teste.png" class="center-block">
+                            <h6 class="text-center">LOGOUT</h6>
+                        </span>
+                    </a>
+                </form>
+            </div>
+        </div>
         {% block content %}{% endblock %}
 
         {% block footer %}
         &copy; Copyright 2020 by <a href="http://127.0.0.1:5000/">AbcBolinhas</a>.
         {% endblock %}
     </div>
+    
     <script src="{{ url_for('static', filename='bootstrap-4.5.2/bootstrap-4.5.2-dist/js/bootstrap.min.js') }}"></script>
 </body>
 
