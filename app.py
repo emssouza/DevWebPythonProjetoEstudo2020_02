@@ -2,7 +2,6 @@
 
 from flask import Flask, session
 import os
-
 from datetime import timedelta
 
 from mod_cliente.cliente import bp_cliente
@@ -20,7 +19,7 @@ app.secret_key= os.urandom(12).hex()
 @app.before_request
 def before_request():
     session.permanent = True
-    app.permanent_session_lifetime = timedelta(minutes=1)
+    app.permanent_session_lifetime = timedelta(minutes=10)
 
 app.register_blueprint(bp_login)
 app.register_blueprint(bp_cliente)

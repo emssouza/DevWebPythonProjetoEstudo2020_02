@@ -1,90 +1,137 @@
 {% extends "modelo.html"%}
 
-{% block title %} FormPedido {% endblock %}
-
 {% block content %}
-<p class="important"> Produto </p>
+<form name="pedido" class="formPedido">
+    <div class="col-md-14 order-md-1">
+        <h4 class="mb-3">Novo Pedido</h4>   
 
-<form action="{{ url_for('pedido.formPedido') }}" method="post">
+        <div class="row">
+            <div class="col-md-2 mb-2">
+                <label for="pedido">Número do Pedido:</label>
+                <input readonly value="" type="text" name="pedido"  id="pedido" 
+                class="form-control"  required>  
+            </div>
 
-    <h1 align="center">NovoPedido</h1>
-    <table align="center">
-        <tr>
-            <td> Número do Pedido: </td>
-            <td> Nome do Cliente </td>
-            <td> Telefone: </td>
-            <td> Código do Cliente </td>
-        </tr>
-        <tr>
-            <td> <input type="text" name="idPedido" id="idPedido" size="50"> </td>
-            <td> <input type="text" name="nomeClientePedido" id="nomeClientePedido" size="50"></td>
-            <td> <input type="text" name="telefoneClientePedido" id="telefoneClientePedido" size="50"></td>
-            <td> <input type="text" name="codigoClientePedido" id="codigoClientePedido" size="100"></td>
-        </tr>
-    </table>
-    <table align="center">
-        <tr>
-            <td> Endereço: </td>
-            <td> Número </td>
-            <td> CEP: </td>
-            <td> Bairro </td>
-            <td> Cidade </td>
-        </tr>
-        <tr>
-            <td> <input type="text" name="enderecoPedido" id="enderecoPedido" size="70"> </td>
-            <td> <input type="text" name="numeroPedido" id="numeroClientePedido" size="20"></td>
-            <td> <input type="text" name="cepClientePedido" id="cepClientePedido" size="50"></td>
-            <td> <input type="text" name="bairroPedido" id="bairroClientePedido" size="50"></td>
-            <td> <input type="text" name="cidadePedido" id="cidadeClientePedido" size="50"></td>
-        </tr>
-    </table>
-    <br>
-    <label for="dataPedido"> Data/Hora
+            <div class="col-md-2 mb-2">
+                <label for="codCliente">Código Cliente:</label>
+                <input  value="" type="text" name="codCliente"  id="id_cliente" 
+                class="form-control" required autofocus>  
+            </div>
+
+            <div class="col-md-8 mb-2">
+                <label for="cliente">Nome do Cliente:</label>
+                <input  value="" type="text" name="cliente"  id="nome_cliente" 
+                class="form-control" placeholder="Informe o Nome do Cliente" autofocus required>  
+            </div>
+
+        </div>
+        <hr>
+
+        <div class="row">
+            <div class="col-md-3 mb-2">
+                <label for="telefone">Telefone:</label>
+                <input value="" type="text" name="telefone"  id="telefone" 
+                class="form-control"  required autofocus>  
+            </div>
+
+            <div class="col-md-8 mb-2">
+                <label for="endereco">Endereço:</label>
+                <input value="" type="text" name="endereco"  id="endereco" 
+                class="form-control"  required autofocus>  
+            </div>
+
+            <div class="col-md-1 mb-2">
+                <label for="numero">Número:</label>
+                <input value="" type="text" name="numero"  id="numero" 
+                class="form-control"  required autofocus>  
+            </div>       
+        </div>
+
+        <div class="row">
+            <div class="col-md-3 mb-2">
+                <label for="cep">CEP:</label>
+                <input value="" type="text" name="cep"  id="cep" 
+                class="form-control"  required autofocus>  
+            </div>
+
+            <div class="col-md-3 mb-2">
+                <label for="bairro">Bairro:</label>
+                <input value="" type="text" name="bairro"  id="bairro" 
+                class="form-control"  required autofocus>  
+            </div>
+
+            <div class="col-md-3 mb-2">
+                <label for="cidade">Cidade:</label>
+                <input value="" type="text" name="cidade"  id="cidade" 
+                class="form-control"  required autofocus>  
+            </div>       
+        </div>
+
+        <hr>
+
+        <div class="row">
+            <div class="col-md-2 mb-2">
+                <label for="data-hora">Data/Hora Local:</label>
+                <input value="" type="datetime-local" name="data-hora"  id="data-hora" 
+                class="form-control"  required autofocus>  
+            </div>
+
+            <div class="col-md-10 mb-2">
+                <label for="observacoes">Observações:</label>
+                <input value="" type="text" name="observacoes"  id="observacoes" 
+                class="form-control"  required autofocus>  
+            </div>            
+        </div>
+
+        <hr>
+
+        <div class="row">
+            <div class="col-md-3 mb-2">
+                <label for="produto">Produto:</label>
+                <input value="" type="text" name="produto"  id="id_produto" 
+                class="form-control"  required autofocus>  
+            </div>  
+
+            <div class="col-md-7 mb-2">
+                <label for="descricao">Descrição:</label>
+                <input value="" type="text" name="descricao"  id="descricao_produto" 
+                class="form-control"  required autofocus>  
+            </div>  
+            
+            <div class="col-md-2 mb-2">
+                <label for="preco">Preço:</label>
+                <input value="" type="text" name="preco"  id="valor_produto" 
+                class="form-control"  required autofocus>  
+            </div> 
+        </div>
+
+        <div class="row">
+            <div class="col-md-1 mb-2">
+                <label for="quantidade">Quantidade:</label>
+                <input value="" type="number" name="quantidade"  id="quantidade" 
+                class="form-control"  required autofocus>  
+            </div>  
+
+            <div class="col-md-2 mb-2">
+                <label for="total">Total R$:</label>
+                <input value="" type="text" name="total"  id="total" 
+                class="form-control"  required autofocus>  
+            </div>  
+            
+            <div class="col-md-9 mb-2">
+                <label for="observacoes">Observações:</label>
+                <input value="" type="text" name="observacoes"  id="observacoes" 
+                class="form-control"  required autofocus>  
+            </div> 
+        </div>
+
         <br>
-        <input type="datetime-local" name="dataPedido" id="dataPedido">
-    </label>
-    <br>
-    <label for="dataPedido"> Data/Hora
-        <br>
-        <input type="text" name="observacaoPedido" id="observacaoPedido">
-    </label>
-    <table align="center">
-        <tr>
-            <td> Produto </td>
-            <td> Descrição</td>
-            <td> Preço </td>
-            <td> Quantidade </td>
-        </tr>
-        <tr>
-            <td> <input type="text" name="produtoPedido" id="produtoPedido" size="50"> </td>
-            <td> <input type="text" name="descricaoPedido" id="descricaoPedido" size="50"></td>
-            <td> <input type="text" name="precoPedido" id="precoPedido" size="50"></td>
-            <td> <input type="text" name="quantidadePedido" id="quantidadeClientePedido" size="50"></td>
-        </tr>
-    </table>
-    <table align="center">
-        <tr>
-            <td> Total R$ </td>
-            <td> Observações</td>
-        </tr>
-        <tr>
-            <td> <input type="text" name="totalPedido" id="totalPedido" size="50"> </td>
-            <td> <input type="text" name="obsPedido" id="obsPedido" size="50"></td>
+              
+        <button type="submit" class="btn btn-primary"><a id="btnNovoPedido" ><i class="fa fa-fw fa-plus"></i>Adicionar</a></button>
+        <button type="submit" class="btn btn-primary"><a id="btnSalvaPedido" ><i class="fa fa-fw fa-save"></i>Salvar</a></button>
+        <button type="submit" class="btn btn-primary"><a id="btnExcluiPedido" ><i class="fa fa-fw fa-close"></i>Excluir</a></button> 
 
-        </tr>
-    </table>
-    <br>
-    <button type="submit" class="btn btn-primary">Adicionar</button>
-    <button type="submit" class="btn btn-primary">Salvar</button>
-    <button type="submit" class="btn btn-primary">Excluir</button>
-    <table>
-        <tr>
-            <td> # </td>
-            <td> Descrição</td>
-            <td> Preço </td>
-            <td> Quantidade </td>
-            <td> Total </td>
-            <td> Observações </td>
-        </tr>
-    </table>
+    </div>
+    
+</form>
     {% endblock%}
