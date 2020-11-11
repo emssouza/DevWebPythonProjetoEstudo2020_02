@@ -1,8 +1,13 @@
 /* NAVIGATION BAR */
+body{
+  background-color: #1351a167
+} 
+
+
 .menubar
 {
-  background-color: #0b0968;
-  height: 100px;
+  background-color: #02022cf5;
+  height: 40px;
 }
 .center-block
 {
@@ -120,6 +125,34 @@
 h6
 {
   font-family: Quicksand;
-  font-size: 1.5em !important;
+  font-size: 1.3em !important;
   color: white;
 }
+
+body{
+  background-color: rgba(157, 160, 160, 0.719);
+ }
+
+  .listas {
+    width: 60%;
+    resize: both;
+    text-align: center;
+    color: #03031b;
+    background-color: #04041b7e;
+    font-weight: inherit;
+  }
+
+  .novo {
+  cursor: pointer;
+  width: 15%;
+  color: #fffffff5;
+  background-color: #045516f5;
+  font-weight: bold;
+
+  }
+
+  .obrigatorio{
+    color: red;
+  }
+  
+

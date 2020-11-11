@@ -1,5 +1,7 @@
 
+from flask import session
 from BancoBD import Banco
+from funcoes import Funcoes
 
 
 class Clientes(object):
@@ -63,37 +65,66 @@ class Clientes(object):
 
     def insert(self):
         banco = Banco()
+        funcoes = Funcoes()
         try:
             c = banco.conexao.cursor()
             c.execute("insert into tb_clientes(nome,endereco,numero,observacao,cep,bairro,cidade,estado,telefone,email,login,senha,grupo) values (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)", (self.nome, self.endereco, self.numero, self.observacao, self.cep, self.bairro, self.cidade, self.estado, self.telefone, self.email, self.login, self.senha, self.grupo))
 
             banco.conexao.commit()
+
             c.close()
             
+            #log
+            log = "| Cliente cadastrado com sucesso!: " + self.nome + " |Usuário:" + session['usuario']+ "|"
+            funcoes.logInfo(log)
+
             return "Cliente cadastrado com sucesso!"
         except:
+            #log
+            log = "| Erro ao Cadastrar Cliente: " + self.nome + " |Usuário:" + session['usuario']+ "|"
+            funcoes.logError(log)
+
             return "Ocorreu um erro na inserção do cliente"
 
     def update(self):
         banco = Banco()
+        funcoes = Funcoes()
         try:
             c = banco.conexao.cursor()
             c.execute("update tb_clientes set nome=%s , endereco=%s , numero=%s, observacao=%s, cep=%s, bairro=%s, cidade=%s, estado=%s, telefone=%s, email=%s, login=%s, senha=%s, grupo=%s where id_cliente = %s",(self.nome, self.endereco, self.numero, self.observacao, self.cep, self.bairro, self.cidade, self.estado, self.telefone, self.email, self.login, self.senha, self.grupo, self.id_cliente))
             banco.conexao.commit()
             c.close()
-            return "Usuário atualizado com sucesso!"
+
+            #log
+            log = "| Cadastro de Cliente Atualizado com sucesso!: " + " |ID: " +self.id_cliente + " | Usuário:" + session['usuario']+ "|"
+            funcoes.logInfo(log)
+
+            return "Cliente atualizado com sucesso!"
         except:
+            #log
+            log = "| Erro ao Atualizar Cadastro de Cliente " + " |ID: " +self.id_cliente + " | Usuário:" + session['usuario']+ "|"
+            funcoes.logError(log)
+
             return "Ocorreu um erro na alteração do usuário"
 
     def delete(self):
         banco = Banco()
+        funcoes = Funcoes()
         try:
             c = banco.conexao.cursor()
             c.execute("delete from tb_clientes where id_cliente = %s", (self.id_cliente))
             banco.conexao.commit()
             c.close()
+
+            #log
+            log = "| Cliente Excluído com sucesso! " + " |ID: " +self.id_cliente + " | Usuário:" + session['usuario']+ "|"
+            funcoes.logInfo(log)
             return "Cliente excluído com sucesso!"
         except:
+            #log
+            log = "| Erro ao Excluir Cliente: " + " |ID: " +self.id_cliente + " | Usuário:" + session['usuario']+ "|"
+            funcoes.logError(log)
+
             return "Ocorreu um erro na exclusão do Cliente"
 
     def selectLogin(self):
@@ -114,3 +145,22 @@ class Clientes(object):
 
         except:
             return "Ocorreu um erro na busca do usuário"
+
+    def verificaSeLoginExiste(self):
+        banco = None
+        c = None
+        try:
+            banco = Banco()
+            c = banco.conexao.cursor()
+            _sql = "SELECT id_cliente FROM tb_clientes WHERE login = %s"
+            _sql_data = (self.login,)
+            c.execute(_sql, _sql_data)
+            result = c.fetchall()
+            return result
+        except Exception as e:
+            raise Exception(str(e))
+        finally:
+            if c:
+                c.close()
+            if banco:
+                banco.conexao.close()

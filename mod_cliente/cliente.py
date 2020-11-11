@@ -1,9 +1,9 @@
 #coding: utf-8
 
-from flask import Blueprint, render_template, request, redirect
+from flask import Blueprint, render_template, request, redirect, jsonify, session
 from mod_login.login import validaSessao
 from mod_cliente.clienteBD import Clientes
-import hashlib
+from funcoes import Funcoes
 
 bp_cliente = Blueprint('cliente', __name__, url_prefix="/cliente", template_folder='templates')
 
@@ -34,6 +34,7 @@ def formEditCliente():
 @validaSessao
 def addCliente():
     cliente=Clientes()
+    funcoes = Funcoes()
     cliente.id_cliente = request.form['id_cliente']
     cliente.nome = request.form['nome']
     cliente.endereco = request.form['endereco']
@@ -46,17 +47,10 @@ def addCliente():
     cliente.telefone = request.form['telefone']
     cliente.email = request.form['email']
     cliente.login = request.form['login']
-    cliente.senha = hashlib.sha3_256( request.form['senha'].encode('utf-8') ).hexdigest()
+    cliente.senha = funcoes.encrypt(request.form['senha'])
     cliente.grupo = request.form['grupo']
-
     cliente.insert()
-
     return redirect("/cliente")
-
-
-#def hash( text ):
-    #return hashlib.sha3_256( text.encode('utf-8') ).hexdigest()
-
 
 @bp_cliente.route("/editCliente", methods=['POST'])
 @validaSessao
@@ -83,5 +77,20 @@ def editCliente():
         cliente.delete()
     
     return redirect("/cliente")
+
+@bp_cliente.route('/verificaSeLoginExiste', methods = ['POST'])
+@validaSessao
+def verificaSeLoginExiste():
+    cliente = Clientes()
+    cliente.login = request.form['login']
+    try:
+        result = cliente.verificaSeLoginExiste()
+        #Verifica se achou o login no banco
+        if len(result) > 0:
+            return jsonify(login_existe = True)
+        else:
+            return jsonify(login_existe = False)
+    except Exception as e:
+            return jsonify(erro = True, mensagem_exception = str(e))
 
 

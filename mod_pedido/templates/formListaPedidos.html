@@ -5,10 +5,11 @@
 {% block content %}
 
 <form action="{{ url_for('pedido.formPedido') }}" method="post">
-    <button type="submit" class="btn btn-primary">Novo Pedido</button>
+    <button type="submit" class="novo">Novo Pedido</button>
     <p class="important"> Lista Pedidos </p>
 
     <table align="center">
+        <thead>
         <tr>
             <td> # </td>
             <td> Telefone </td>
@@ -22,6 +23,8 @@
             <td> Data/Hora</td>
             <td> Produtos</td>
         </tr>
+    </thead>
+    
     </table>
 </form>
 {% endblock%}

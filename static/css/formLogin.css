@@ -1,233 +1,220 @@
-/* CSS reset */
-*, *:before, *:after { 
-    margin:0;
-    padding:0;
-    font-family: Arial,sans-serif;
-  }
-   
-  /* remove a linha dos links */
-  a{
-    text-decoration: none;
-  }
-   
-  /* esconde as ancoras da tela */
-  a.links{
-    display: none;
-  }
+@use postcss-cssnext;
 
-  .content{
-    width: 500px;
-    min-height: 560px;    
-    margin: 0px auto;
-  }
+/* config.css */
 
-  h1{
-    font-size: 48px;
-    color: #012733;
-    padding: 2px 0 10px 0;
-    font-family: Arial,sans-serif;
-    font-weight: bold;
-  
-    text-align: center; adding-bottom: 30px;
-  }
-
-  h1:after{
-    content: ' ';
-    display: block;
-    width: 100%;
-    height: 2px;
-    margin-top: 10px;
-    background: -webkit-linear-gradient(left, rgba(147,184,189,0) 0%,rgba(147,184,189,0.8) 20%,rgba(147,184,189,1) 53%,rgba(147,184,189,0.8) 79%,rgba(147,184,189,0) 100%); 
-    background: linear-gradient(left, rgba(147,184,189,0) 0%,rgba(147,184,189,0.8) 20%,rgba(147,184,189,1) 53%,rgba(147,184,189,0.8) 79%,rgba(147,184,189,0) 100%); 
-  }
-
-  p{
-    margin-bottom:15px;
-  }
-   
-  .content p:first-child{
-    margin: 0px;
-  }
-   
-  label{
-    color: #376d75;
-  }
-  
- /* placeholder */
-::-webkit-input-placeholder  {
-    color: #bebcbc; 
-    font-style: italic;
-  }
-   
-  input:-moz-placeholder,
-  textarea:-moz-placeholder{
-    color: #bebcbc;
-    font-style: italic;
-  } 
-
-  input {
-    outline: none;
-  }
-   
-  /*estilo dos input,  menos o checkbox */
-  input:not([type="checkbox"]){
-    width: 95%;
-    margin-top: 4px;
-    padding: 10px;    
-    border: 1px solid #b2b2b2;
-   
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
-   
-    -webkit-box-shadow: 0px 1px 4px 0px rgba(168, 168, 168, 0.6) inset;
-    box-shadow: 0px 1px 4px 0px rgba(168, 168, 168, 0.6) inset;
-   
-    -webkit-transition: all 0.2s linear;
-    transition: all 0.2s linear;
-  }
-   
-  /*estilo do botão submit */
-  input[type="submit"]{
-    width:95%!important;
-    cursor: pointer;  
-    background: rgb(2, 49, 59);
-    padding: 8px 5px;
-    color: #fff;
-    font-size: 18px;  
-    border: 1px solid #fff;   
-    margin-bottom: 10px;  
-    text-shadow: 0 1px 1px #333;
-   
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-   
-    transition: all 0.2s linear;
-  }
-   
-  /*estilo do botão submit no hover */
-  input[type="submit"]:hover{
-    background: #023d47;
-  }
-
-  .link{
-    position: absolute;
-    background: #e1eaeb;
-    color: #7f7c7c;
-    left: 0px;
-    height: 20px;
-    width: 440px;
-    padding: 17px 30px 20px 30px;
-    font-size: 16px;
-    text-align: right;
-    border-top: 1px solid #dbe5e8;
-   
-    -webkit-border-radius: 0 0  5px 5px;
-    border-radius: 0 0  5px 5px;
-  }
-   
-  .link a {
-    font-weight: bold;
-    background: #f7f8f1;
-    padding: 6px;
-    color: rgb(29, 162, 193);
-    margin-left: 10px;
-    border: 1px solid #cbd518;
-   
-    -webkit-border-radius: 4px;
-    border-radius: 4px;  
-   
-    -webkit-transition: all 0.4s linear;
-    transition: all 0.4s  linear;
-  }
-   
-  .link a:hover {
-    color: #39bfd7;
-    background: #f7f7f7;
-    border: 1px solid #4ab3c6;
-  }
-
-  #cadastro, 
-#login{
-  position: center;
-  top: 0px;
-  width: 88%;   
-  padding: 18px 6% 60px 6%;
-  margin: 0 0 35px 0;
-  background: #f7f7f7;
-  border: 1px solid rgba(147, 184, 189,0.8);
-   
-  -webkit-box-shadow: 5px;
-  border-radius: 5px;
-   
-  -webkit-animation-duration: 0.5s;
-  -webkit-animation-timing-function: ease;
-  -webkit-animation-fill-mode: both;
- 
-  animation-duration: 0.5s;
-  animation-timing-function: ease;
-  animation-fill-mode: both;
+:root {
+  --baseColor: #02022cf5;
 }
 
-/* Efeito ao clicar no botão ( Ir para Login ) */
-#paracadastro:target ~ .content #cadastro,
-#paralogin:target ~ .content #login{
-  z-index: 2;
-  -webkit-animation-name: fadeInLeft;
-  animation-name: fadeInLeft;
- 
-  -webkit-animation-delay: .1s;
-  animation-delay: .1s;
-}
- 
-/* Efeito ao clicar no botão ( Cadastre-se ) */
-#registro:target ~ .content #login,
-#paralogin:target ~ .content #cadastro{
-  -webkit-animation-name: fadeOutLeft;
-  animation-name: fadeOutLeft;
+/* helpers/align.css */
+
+.align {
+  display: flex;
+  place-items: center
 }
 
-/*fadeInLeft*/
-@-webkit-keyframes fadeInLeft {
-    0% {
-      opacity: 0;
-      -webkit-transform: translateX(-20px);
-    }
-    100% {
-      opacity: 1;
-      -webkit-transform: translateX(0);
-    }
-  }
-   
-  @keyframes fadeInLeft {
-    0% {
-      opacity: 0;
-      transform: translateX(-20px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-   
-  /*fadeOutLeft*/
-  @-webkit-keyframes fadeOutLeft {
-    0% {
-      opacity: 1;
-      -webkit-transform: translateX(0);
-    }
-    100% {
-      opacity: 0;
-      -webkit-transform: translateX(-20px);
-    }
-  }
-   
-  @keyframes fadeOutLeft {
-    0% {
-      opacity: 1;
-      transform: translateX(0);
-    }
-    100% {
-      opacity: 0;
-      transform: translateX(-20px);
-    }
-  }
+/* helpers/grid.css */
+
+:root {
+  --gridMaxWidth: 20rem;
+  --gridWidth: 90%;
+}
+
+.grid {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: var(--gridMaxWidth);
+  width: var(--gridWidth);
+}
+
+/* helpers/hidden.css */
+
+.hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+/* helpers/icon.css */
+
+:root {
+  --iconFill: var(--baseColor);
+}
+
+.icons {
+  display: none;
+}
+
+.icon {
+  display: inline-block;
+  fill: var(--iconFill);
+  font-size: 1rem;
+  height: 1em;
+  vertical-align: middle;
+  width: 1em;
+}
+
+/* layout/base.css */
+
+:root {
+  --htmlFontSize: 100%;
+
+  --bodyBackgroundColor: rgba(157, 160, 160, 0.719);
+  ;
+  --bodyColor: var(--baseColor);
+  --bodyFontFamily: 'Open Sans';
+  --bodyFontFamilyFallback: sans-serif;
+  --bodyFontSize: 0.875rem;
+  --bodyFontWeight: 400;
+  --bodyLineHeight: 1.5;
+}
+
+* {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: var(--htmlFontSize);
+  height: 100%;
+}
+
+body {
+  background-color: var(--bodyBackgroundColor);
+  color: var(--bodyColor);
+  font-family: var(--bodyFontFamily), var(--bodyFontFamilyFallback);
+  font-size: var(--bodyFontSize);
+  font-weight: var(--bodyFontWeight);
+  height: 100%;
+  line-height: var(--bodyLineHeight);
+  margin: 0;
+  min-height: 100vh;
+}
+
+/* modules/anchor.css */
+
+:root {
+  --anchorColor: rgb(16, 1, 44);
+}
+
+a {
+  color: var(--anchorColor);
+  outline: 0;
+  text-decoration: none;
+}
+
+a:focus,
+a:hover {
+  text-decoration: underline;
+}
+
+/* modules/form.css */
+
+:root {
+  --formFieldMargin: 0.875rem;
+}
+
+input {
+  background-image: none;
+  border: 0;
+  color:inherit;
+  font: inherit;
+  margin: 0;
+  outline: 0;
+  padding: 0;
+  transition: background-color 0.3s;
+  width: 100%;
+}
+
+input[type='submit'] {
+  cursor: pointer;
+  width: 100%;
+  align-content: center;
+  color: #fffffff5;
+  background-color: #02022cf5;
+  font-weight: bold;
+
+}
+
+.form {
+  margin: calc(var(--formFieldMargin) * -1);
+}
+
+.form input[type='password'],
+.form input[type='text'],
+.form input[type='submit'] {
+  width: 100%;
+  align-content: center;
+}
+
+.form__field {
+  display: flex;
+  margin: var(--formFieldMargin);
+  width: 100%;
+}
+
+.form__input {
+  flex: 1;
+}
+
+/* modules/login.css */
+
+
+.login {
+  color: var(--loginColor);
+}
+
+.login label,
+.login input[type='text'],
+.login input[type='password'],
+.login input[type='submit'] {
+  border-radius: var(--loginBorderRadus);
+  padding: 1rem;
+}
+
+.login label {
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+.login input[type='password'],
+.login input[type='text'] {
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.login input[type='password']:focus,
+.login input[type='password']:hover,
+.login input[type='text']:focus,
+.login input[type='text']:hover {
+}
+
+.login input[type='submit'] {
+  font-weight: 700;
+  text-transform: uppercase;
+  width: auto;
+}
+
+
+/* modules/text.css */
+
+:root {
+  --paragraphMarginBottom: 1.5rem;
+  --paragraphMarginTop: 1.5rem;
+}
+
+p {
+  margin-bottom: var(--paragraphMarginBottom);
+  margin-top: var(--paragraphMarginTop);
+}
+
+.text--center {
+  text-align: center;
+}
