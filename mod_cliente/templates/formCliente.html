@@ -17,16 +17,17 @@
             </div>
 
             <div class="col-md-8 mb-2">
-                <label for="nome">Nome Cliente:</label>
+                <label class="obrigatorio" for="nome">Nome Cliente:</label>
                 <input value="{{ cliente.nome }}" type="text" name="nome" id="nome" autofocus class="form-control"
-                    required size="100">
+                    required maxlength="100">
             </div>
         </div>
 
         <div class="row">
             <div class="col-md-8 mb-2">
                 <label for="endereco">Endereço:</label>
-                <input value="{{ cliente.endereco }}" type="text" name="endereco" id="endereco" class="form-control" size="150">
+                <input value="{{ cliente.endereco }}" type="text" name="endereco" id="endereco" class="form-control"
+                maxlength="150">
             </div>
 
             <div class="col-md-2 mb-2">
@@ -39,24 +40,26 @@
             <div class="col-md-10 mb-2">
                 <label for="observacao">Observações:</label>
                 <input value="{{ cliente.observacao }}" type="text" name="observacao" id="observacao"
-                    class="form-control" size="200">
+                    class="form-control" maxlength="200">
             </div>
         </div>
 
         <div class="row">
             <div class="col-md-2 mb-2">
                 <label for="cep">CEP:</label>
-                <input value="{{ cliente.cep }}" type="text" name="cep" id="cep" class="form-control" size="8">
+                <input value="{{ cliente.cep }}" type="text" name="cep" id="cep" class="form-control" maxlength="10">
             </div>
 
             <div class="col-md-3 mb-2">
                 <label for="bairro">Bairro:</label>
-                <input value="{{ cliente.bairro }} " type="text" name="bairro" id="bairro" class="form-control" size="50">
+                <input value="{{ cliente.bairro }} " type="text" name="bairro" id="bairro" class="form-control"
+                maxlength="80">
             </div>
 
             <div class="col-md-3 mb-2">
                 <label for="cidade">Cidade:</label>
-                <input value="{{ cliente.cidade }}" type="text" name="cidade" id="cidade" class="form-control" size="50">
+                <input value="{{ cliente.cidade }}" type="text" name="cidade" id="cidade" class="form-control"
+                maxlength="80">
             </div>
 
 
@@ -71,29 +74,35 @@
 
         <div class="row">
             <div class="col-md-4 mb-2">
-                <label for="telefone">Telefone:</label>
-                <input value="{{ cliente.telefone }}" type="text" name="telefone" id="telefone" class="form-control" required size="11">
+                <label class="obrigatorio" for="telefone">Telefone:</label>
+                <input value="{{ cliente.telefone }}" type="text" name="telefone" id="telefone" class="form-control"
+                    required maxlength="15">
             </div>
 
             <div class="col-md-6 mb-2">
-                <label for="email">Email:</label>
-                <input value="{{ cliente.email }}" type="email" name="email" id="email" class="form-control" required size="100">
+                <label class="obrigatorio" for="email">Email:</label>
+                <input value="{{ cliente.email }}" type="email" name="email" id="email" class="form-control" required
+                maxlength="100">
             </div>
         </div>
 
         <div class="row">
             <div class="col-md-3 mb-2">
-                <label for="login">Login:</label>
-                <input value="{{ cliente.login }}" type="text" name="login" id="login" class="form-control" required size="11">
+                <label class="obrigatorio" for="login">Login:</label>
+                <input value="{{ cliente.login }}" type="text" name="login" id="login" class="form-control" required
+                maxlength="11">
+                <div class="valid-feedback">Login OK!</div> <!-- incluido para ajax -->
+                <div class="invalid-feedback">Login já existente! Tente outro!</div> <!-- incluido para ajax -->
             </div>
 
             <div class="col-md-4 mb-2">
-                <label for="senha">Senha:</label>
-                <input value="{{ cliente.senha }}" type="password" name="senha" id="senha" class="form-control" required>
+                <label class="obrigatorio" for="senha">Senha:</label>
+                <input value="{{ cliente.senha }}" type="password" name="senha" id="senha" class="form-control"
+                    required>
             </div>
 
             <div class="col-md-3 mb-2">
-                <label for="grupo">Grupo:</label>
+                <label class="obrigatorio" for="grupo">Grupo:</label>
                 <select name="grupo" id="grupo" class="form-control" required>
                     <option>Admin</option>
                     <option>Funcionário</option>
@@ -106,7 +115,7 @@
         <div class="for-row">
             <div class="col">
                 <button type="submit" class="btn btn-primary" name="salvaInsertCliente" id="salvaInsertCliente"><i
-                        class="fas fa-save"></i>Salvar</a></button>
+                        class="fa fa-save"></i>Salvar</a></button>
             </div>
         </div>
         {% else %}
@@ -114,9 +123,9 @@
             <div class="col">
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary" name="salvaEditaCliente" id="salvaEditaCliente"><i
-                        class="fas fa-save"></i>Salvar Edição</a></button>
-                    <button formnovalidate type="submit" class="btn btn-danger" name="salvaExcluiCliente" id="salvaExcluiCliente"><i
-                        class="far fa-trash-alt"></i>Excluir</a></button>
+                            class="fas fa-save"></i>Salvar Edição</a></button>
+                    <button formnovalidate type="submit" class="btn btn-danger" name="salvaExcluiCliente"
+                        id="salvaExcluiCliente"><i class="far fa-trash-alt"></i>Excluir</a></button>
                 </div>
             </div>
         </div>
@@ -124,4 +133,35 @@
 
     </form>
 
+    {% endblock %}
+    {% block js %}
+    <script>
+        // Sempre pega a url da barra de endereço
+        $SCRIPT_ROOT = {{ request.script_root | tojson | safe }};
+        $(document).ready(function () {
+            //Verifica se o login existe ou não
+            $('#login').keyup(function (e) {
+                if (e.target.value.length > 0) {
+                    $.post($SCRIPT_ROOT + "{{ url_for('cliente.verificaSeLoginExiste') }}", {
+                        login: $('#login').val()
+                    }, function (data) {
+                        if (data.erro) {
+                            console.log(data.mensagem_exception);
+                        }
+                        else if (data.login_existe) {
+                            $('#login').addClass('is-invalid').removeClass('is-valid');
+                            $("button[name='salvaUsuarioDB']").attr('disabled', true);
+                        }
+                        else {
+                            $('#login').addClass('is-valid').removeClass('is-invalid');
+                            $("button[name='salvaUsuarioDB']").attr('disabled', false)
+                        }
+                    })
+                }
+                else {
+                    $('#login').removeClass('is-valid').removeClass('is-invalid');
+                }
+            })
+        })
+    </script>
     {% endblock %}

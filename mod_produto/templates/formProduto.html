@@ -1,46 +1,126 @@
 {% extends "modelo.html"%}
 
 {% block content %}
-<form name="produto" class="formProduto" action="{{ url_for('produto.formProduto') }}" method="post">
-    <div class="col-md-8 order-md-1">
-        <h4 class="mb-3">Novo Produto</h4>   
+{% if produto.id_produto == 0: %}
+<h1>Novo Produto</h1>
+<form id="addProduto" name="addProduto" method="POST" enctype="multipart/form-data">
+    {% else: %}
+    <h1>Editar Produto: {{ produto.id_produto }}</h1>
+    <form id="editProduto" name="editProduto" method="POST" enctype="multipart/form-data">
+        {% endif %}
+                <div class="row">
+                    <div class="col-md-8 mb-2">
+                        <label for="id_produto">Produto:</label>
+                        <input readonly value="{{ produto.id_produto }}" type="text" name="id_produto" id="id_produto" class="form-control"
+                            placeholder="ID" required>
+                    </div>
+                </div>
 
-        <div class="row">
-            <div class="col-md-8 mb-2">
-                <label for="id_produto">Produto:</label>
-                <input readonly value="" type="text" name="id_produto"  id="id_produto" 
-                class="form-control" placeholder="ID"  required>  
+                <div class="row">
+                    <div class="col-md-8 mb-2">
+                        <label class="obrigatorio" for="descricao">Descrição do Produto:</label>
+                        <input value="{{ produto.descricao }}" type="text" name="descricao" id="descricao" class="form-control"
+                            placeholder="Descrição do Produto" autofocus required>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-8 mb-2">
+                        <label class="obrigatorio" for="valor">Valor:</label>
+                        <input value="{{ produto.valor }}" type="text" name="valor" id="valor" class="form-control" autofocus required>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-8 mb-2">
+                        <label class="obrigatorio" for="imagem">Imagem:</label>
+                        <input value="" type="file" name="imagem" accept="image/*" id="imagem" class="form-control" autofocus required>
+                        <img src='{{ produto.imagem }}' width='150'>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary"><a id="salvaProdutoDB" ><i class="fa fa-fw fa-save"></i>Salvar</a></button>
             </div>
-        </div>
 
-        <div class="row">
-            <div class="col-md-8 mb-2">
-                <label for="descricao">Descrição do Produto:</label>
-                <input value="" type="text" name="descricao"  id="descricao" 
-                class="form-control" placeholder="Descrição do Produto" autofocus required>  
-            </div>
-        </div>
+        </form>
 
-        <div class="row">
-            <div class="col-md-8 mb-2">
-                <label for="valor">Valor:</label>
-                <input value="" type="text" name="valor"  id="valor" 
-                class="form-control" autofocus required>  
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-8 mb-2">
-                <label for="imagem">Imagem:</label>
-                <input value="" type="file" name="imagem"  id="imagem" 
-                class="form-control" autofocus required>  
-            </div>
-        </div>
-              
-        <button type="submit" class="btn btn-primary><a id="btnSalvaNovoProduto" href=""><i class="fa fa-fw fa-save"></i>Salvar</a></button>    
-
-    </div>
+        {% block js %}
+        <script>
     
-</form>
-
-{% endblock%}
+            $SCRIPT_ROOT = {{ request.script_root|tojson|safe }}; // pega a url da barra de endereço
+            $('#addProduto').submit(function (e) {
+                e.preventDefault(); // parar o envio para poder fazer manualmente
+                var form = $('#addProduto')[0]; // captura o form
+                var data = new FormData(form); // cria o FormData {Object}
+                $.ajax({
+                    type: "POST",
+                    enctype: 'multipart/form-data',
+                    url: "{{url_for('produto.addProduto')}}",
+                    data: data,
+                    processData: false, contentType: false, cache: false, timeout: 600000,
+                    // manipular o retorno da requisição
+                    success: function (data) {
+                        if (!data.erro) {
+                            swal({
+                                title: "", text: data.mensagem, type: "success", confirmButtonClass: "btn-success", confirmButtonText: "Ok", closeOnConfirm: false, closeOnCancel: false
+                            },
+                                function (isConfirm) {
+                                    if (isConfirm) {
+                                        window.location.replace($SCRIPT_ROOT + "{{ url_for('produto.formListaProdutos') }}");
+                                    }
+                                });
+                        }
+                        else {
+                            swal("", data.mensagem + '\n' + data.mensagem_exception, "error");
+                        }
+                    },
+                    error: function (e) {
+                        console.log(e);
+                    }
+                })
+            })
+            // incluir aqui a opção para editar
+            $('#editProduto').submit(function (e) {
+                e.preventDefault(); // parar o envio para poder fazer manualmente
+                var form = $('#editProduto')[0]; // captura o form
+                var data = new FormData(form); // cria o FormData {Object}
+                $.ajax({
+                    type: "POST",
+                    enctype: 'multipart/form-data',
+                    url: "{{url_for('produto.editProduto')}}",
+                    data: data,
+                    processData: false, // impedir que o jQuery tranforma a "data" em querystring
+                    contentType: false, // desabilitar o cabeçalho "Content-Type"
+                    cache: false, // desabilitar o "cache"
+                    timeout: 600000, // definir um tempo limite (opcional)
+                    // manipular o retorno da requisição
+                    success: function (data) {
+                        if (!data.erro) {
+                            swal({
+                                title: "",
+                                text: data.mensagem,
+                                type: "success",
+                                confirmButtonClass: "btn-success",
+                                confirmButtonText: "Ok",
+                                closeOnConfirm: false,
+                                closeOnCancel: false
+                            },
+                                function (isConfirm) {
+                                    if (isConfirm) {
+                                        window.location.replace($SCRIPT_ROOT + "{{ url_for('produto.formListaProdutos') }}");
+                                    }
+                                });
+                        }
+                        else {
+                            swal("", data.mensagem + '\n' + data.mensagem_exception, "error");
+                            console.log(data.mensagem_exception);
+                        }
+                    },
+                    error: function (e) {
+                        console.log(e);
+                    }
+                })
+            })
+        </script>
+        {% endblock %}
+        {% endblock%}

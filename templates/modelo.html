@@ -7,8 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{% block title %}{% endblock %} - AbcBolinhas</title>
-    <link rel="stylesheet"
-        href="{{ url_for('static', filename='bootstrap-4.5.2/bootstrap-4.5.2-dist/css/bootstrap.min.css') }}">
+
+    {% block style %}
+    <!--Biblioteca de icones-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    {% endblock %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-4.5.2-dist/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='fontawesome-free-5.14.0-web/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='sweetalert/sweetalert.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-4.5.2/bootstrap-4.5.2-dist/css/bootstrap.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/modelo.css') }}" />
     {% endblock %}
 </head>
@@ -20,7 +28,7 @@
             <div class="home col-md-2 navibutton">
                 <form id="menuHome" action="{{ url_for('home.home') }}" method="POST">
                     <a href="javascript:;" onclick=" document.getElementById('menuHome').submit();">
-                        <img src="media_files/home.svg" class="center-block">
+                        <!--<img src="media_files/home.svg" class="center-block"> -->
                         <h6 class="text-center">INÍCIO <span class="caret"></span></h6>
                     </a>
                 </form>
@@ -29,7 +37,7 @@
             <div class="col-md-2 navibutton">
                 <form id="menuClientes" action="{{ url_for('cliente.formListaClientes') }}" method="POST">
                     <a href="javascript:;" onclick=" document.getElementById('menuClientes').submit();">
-                        <img src="media_files/teste.png" class="center-block">
+                        <!--<img src="media_files/home.svg" class="center-block"> -->
                         <h6 class="text-center">CLIENTES <span class="caret"></span></h6>
                     </a>
                 </form>
@@ -38,7 +46,7 @@
             <div class="col-md-2 navibutton">
                 <form id="menuPedidos" action="{{ url_for('pedido.formListaPedidos') }}" method="POST">
                     <a href="javascript:;" onclick=" document.getElementById('menuPedidos').submit();">
-                        <img src="media_files/teste.png" class="center-block">
+                        <!--<img src="media_files/home.svg" class="center-block"> -->
                         <h6 class="text-center">PEDIDOS<span class="caret"
                                 style="position:absolute; right:-1px; bottom:19px"></span></h6>
                     </a>
@@ -48,8 +56,9 @@
             <div class="col-md-2 navibutton">
                 <form id="menuProdutos" action="{{ url_for('produto.formListaProdutos') }}" method="POST">
                     <a href="javascript:;" onclick=" document.getElementById('menuProdutos').submit();">
-                        <img src="media_files/teste.png" class="center-block">
-                        <h6 class="text-center">PRODUTOS</h6></a>
+                        <!--<img src="media_files/home.svg" class="center-block"> -->
+                        <h6 class="text-center">PRODUTOS</h6>
+                    </a>
                 </form>
             </div>
             <!-- LOGOUT -->
@@ -57,21 +66,37 @@
                 <form id="menulogout" action="{{ url_for('login.logout') }}" method="POST">
                     <a href="javascript:;" onclick=" document.getElementById('menulogout').submit();">
                         <span>
-                            <img src="media_files/teste.png" class="center-block">
+                            <!--<img src="media_files/home.svg" class="center-block"> -->
                             <h6 class="text-center">LOGOUT</h6>
                         </span>
                     </a>
                 </form>
             </div>
         </div>
+        <p></p><p></p><p></p><p></p><p></p>
         {% block content %}{% endblock %}
 
         {% block footer %}
+        <div>
+            {% if 'usuario' in session %}
+            <b> Usuário: </b> {{ session['usuario'] }} &nbsp; <b>Grupo: </b> {{ session['grupo'] }}
+            {% endif %}
+        </div>
+
         &copy; Copyright 2020 by <a href="http://127.0.0.1:5000/">AbcBolinhas</a>.
         {% endblock %}
     </div>
-    
+
     <script src="{{ url_for('static', filename='bootstrap-4.5.2/bootstrap-4.5.2-dist/js/bootstrap.min.js') }}"></script>
+
 </body>
+
+<!-- monitorar log do navegador, pois a ordem interfere -->
+<script src="{{ url_for('static', filename='jquery-3.5.1.js') }}"></script>
+<script src="{{ url_for('static', filename='jquery.maskedinput.js') }}"></script>
+<script src="{{ url_for('static', filename='bootstrap-4.5.2-dist/js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static', filename='fontawesome-free-5.14.0-web/js/all.js') }}"></script>
+<script src="{{ url_for('static', filename='sweetalert/sweetalert.js') }}"></script>
+{% block js %}{% endblock %}
 
 </html>

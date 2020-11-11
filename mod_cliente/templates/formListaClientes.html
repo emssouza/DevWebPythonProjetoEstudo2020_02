@@ -1,28 +1,37 @@
 {% extends "modelo.html"%}
 
+{% block title %} FormListaClientes {% endblock %}
+
+
+{% block style %}
+{{super()}}
+
+{% endblock %}
+
 {% block content %}
+{{super()}}
 
 <form action="{{ url_for('cliente.formCliente') }}" method="post">
-    <button type="submit" class="btn btn-primary">Novo Cliente</button>
-    <h1><p class="important"> Lista Clientes </p></h1>
+    <button type="submit" class="novo">Novo Cliente</button>
 
-    <table align="center">
-        <thead>
+    <h1><p class="important"> Lista Clientes </p></h1>
+    <table border=2 class="listas">
+        <thead class="thead-dark">
             <tr>
-                <th scope="row"> # </th>
-                <th scope="row"> Nome </th>
-                <th scope="row"> Endereço </th>
-                <th scope="row"> Número </th>
-                <th scope="row"> Obervação</th>
-                <th scope="row"> CEP</th>
-                <th scope="row"> Bairro</th>
-                <th scope="row"> Cidade</th>
-                <th scope="row"> Estado</th>
-                <th scope="row"> Telefone</th>
-                <th scope="row"> Email</th>
-                <th scope="row"> Login</th>
-                <th scope="row"> Senha</th>
-                <th scope="row"> Grupo</th>
+                <th scope="col"> # </th>
+                <th scope="col"> Nome </th>
+                <th scope="col"> Endereço </th>
+                <th scope="col"> Número </th>
+                <th scope="col"> Obervação</th>
+                <th scope="col"> CEP</th>
+                <th scope="col"> Bairro</th>
+                <th scope="col"> Cidade</th>
+                <th scope="col"> Estado</th>
+                <th scope="col"> Telefone</th>
+                <th scope="col"> Email</th>
+                <th scope="col"> Login</th>
+                <th scope="col"> Grupo</th>
+                <th scope="col"> Editar</th>
             </tr>
         </thead>
 
@@ -42,18 +51,20 @@
                 <td> {{ row[9] }}</td>
                 <td> {{ row[10] }}</td>
                 <td> {{ row[11] }}</td>
-                <td> {{ row[12] }}</td>
                 <td> {{ row[13] }}</td>
                 <td>
                     <form action='{{ url_for("cliente.formEditCliente") }}' method='POST' name='editUsuario'>
                         <input type='hidden' name='id_cliente' value='{{ row[0] }}'>
-                        <button type='submit' name='formEditCliente'><i class='fas fa-edit'></i></button>
+                        <button type='submit' name='formEditCliente'><i class='fa fa-fw  fa-edit'></i></button>
                     </form>
                 </td>
             </tr>
             {% endfor %}
             {% endif %}
+
+
         </tbody>
+
     </table>
 </form>
 
