@@ -1,6 +1,7 @@
 {% extends "modelo.html"%}
 
 {% block content %}
+{{ super() }}
 
 {% if cliente.id_cliente == 0 %}
 <h1>Novo Cliente</h1>
@@ -47,7 +48,7 @@
         <div class="row">
             <div class="col-md-2 mb-2">
                 <label for="cep">CEP:</label>
-                <input value="{{ cliente.cep }}" type="text" name="cep" id="cep" class="form-control" maxlength="10">
+                <input value="{{ cliente.cep }}" type="text" name="cep" id="cep" class="cep form-control" maxlength="10">
             </div>
 
             <div class="col-md-3 mb-2">
@@ -75,7 +76,7 @@
         <div class="row">
             <div class="col-md-4 mb-2">
                 <label class="obrigatorio" for="telefone">Telefone:</label>
-                <input value="{{ cliente.telefone }}" type="text" name="telefone" id="telefone" class="form-control"
+                <input value="{{ cliente.telefone }}" type="text" name="telefone" id="telefone" class="phone form-control"
                     required maxlength="15">
             </div>
 
@@ -135,6 +136,7 @@
 
     {% endblock %}
     {% block js %}
+    {{ super() }}
     <script>
         // Sempre pega a url da barra de endereço
         $SCRIPT_ROOT = {{ request.script_root | tojson | safe }};
