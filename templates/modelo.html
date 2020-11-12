@@ -10,13 +10,15 @@
 
     {% block style %}
     <!--Biblioteca de icones-->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     {% endblock %}
     <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-4.5.2-dist/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='fontawesome-free-5.14.0-web/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='sweetalert/sweetalert.css') }}">
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-4.5.2/bootstrap-4.5.2-dist/css/bootstrap.min.css') }}">
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='bootstrap-4.5.2/bootstrap-4.5.2-dist/css/bootstrap.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/modelo.css') }}" />
     {% endblock %}
 </head>
@@ -73,7 +75,11 @@
                 </form>
             </div>
         </div>
-        <p></p><p></p><p></p><p></p><p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
         {% block content %}{% endblock %}
 
         {% block footer %}
@@ -94,9 +100,21 @@
 <!-- monitorar log do navegador, pois a ordem interfere -->
 <script src="{{ url_for('static', filename='jquery-3.5.1.js') }}"></script>
 <script src="{{ url_for('static', filename='jquery.maskedinput.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery.mask.min.js')}}"></script>
 <script src="{{ url_for('static', filename='bootstrap-4.5.2-dist/js/bootstrap.min.js') }}"></script>
 <script src="{{ url_for('static', filename='fontawesome-free-5.14.0-web/js/all.js') }}"></script>
 <script src="{{ url_for('static', filename='sweetalert/sweetalert.js') }}"></script>
-{% block js %}{% endblock %}
+<script>
+    $(document).ready(function () {
+        $('.cep').mask('00000-000')
+        $('.phone').mask('(00) 00000-0000');
+        $('.money').mask('000.000.000.000,00');
+        $('.valor').mask('#.##0,00', (reverser: true))
+    });
+</script>
+
+{% block js %}
+
+{% endblock %}
 
 </html>

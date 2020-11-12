@@ -35,8 +35,7 @@ def validaLogin():
         session['grupo'] = cliente.grupo
 
         #log
-        logUsuario = session['usuario']
-        log = "Login Efetuado com sucesso" + "|Usuário:" + logUsuario + "|"
+        log = "Login Efetuado com sucesso" + "|Usuário:" + session['usuario']+ "|"
         funcoes.logInfo(log)
 
         # abre a aplicação na tela home
@@ -52,9 +51,9 @@ def validaLogin():
 
 @bp_login.route ("/logout", methods=['POST'])
 def logout():
+    funcoes = Funcoes()
     #log
-    logUsuario = session['usuario']
-    log = "Logoff Efetuado" + "|Usuário:" + logUsuario + "|"
+    log = "Logoff Efetuado" + "|Usuário:" + session['usuario'] + "|"
     funcoes.logInfo(log)
 
     session.pop('usuario',None)
