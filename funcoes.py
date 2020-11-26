@@ -18,3 +18,6 @@ class Funcoes(object):
     def logError(self, parametro_log):
         logging.error(parametro_log)
         return parametro_log
+
+
+

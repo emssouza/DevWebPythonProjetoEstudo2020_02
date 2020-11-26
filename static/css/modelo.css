@@ -82,7 +82,7 @@ body{
     background-color: #fff;
     left:0px;
     min-width: 183px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgba(32, 32, 32, 0.2);
     z-index: 1;
 }
 
@@ -134,11 +134,11 @@ body{
  }
 
   .listas {
-    width: 60%;
+    width: 100%;
     resize: both;
     text-align: center;
     color: #03031b;
-    background-color: #04041b7e;
+    background-color: #5454727e;
     font-weight: inherit;
   }
 

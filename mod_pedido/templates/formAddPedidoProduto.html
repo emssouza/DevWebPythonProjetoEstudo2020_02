@@ -1,6 +1,6 @@
 {% extends "modelo.html" %}
 
-{% block title %} Novo Pedido {% endblock %}
+{% block title %} Adicionar Produto em Pedido {% endblock %}
 
 {% block style %}
 {{super()}}
@@ -11,43 +11,40 @@
 {% block content %}
 {{ super() }}
 {% if pedido.id_pedido == 0: %}
-<h1>Novo Pedido</h1>
-<form id="addPedido" name="addPedido" method="POST" enctype="multipart/form-data">
+<h1>Adicionar Produto em Pedido</h1>
+<form id="addProduto" name="addProduto" method="POST" enctype="multipart/form-data">
     {% else: %}
     <h1>Editar Pedido: {{ pedido.id_pedido }}</h1>
-    <form id="editPedido" name="editPedido" method="POST" enctype="multipart/form-data">
+    <form id="editProduto" name="editProduto" method="POST" enctype="multipart/form-data">
         {% endif %}
+
         <div class="row">
             <div class="col-md-2 mb-2">
                 <label for="id_pedido">Número do Pedido:</label>
-                <input readonly value="{{ pedido.id_pedido }}" type="text" name="id_pedido" id="id_pedido" class="form-control">
+                <input value="{{ pedido.id_pedido }}" type="text" name="id_pedido" id="id_pedido" class="form-control">
             </div>
         </div>
-        <br>
-        <div class="row">
-
-            <div class="col-md-3 mb-2">
-                <label for="data_hora">Data/Hora Local:</label>
-                <input value="" type="datetime-local" name="data_hora" id="data_hora" class="form-control" required
-                    autofocus>
-            </div>
-
-            <!--
-            <div class="col-md-2 mb-2">
-                <label for="id_cliente">id cliente:</label>
-                <input value="{{ pedido.id_cliente }}" type="text" name="id_cliente" id="id_cliente"
-                    class="form-control" placeholder="" >
-            </div>
-    -->
 
             <div class="col-md-5 mb-2">
-                <label for="nome">Nome Cliente:</label>
-                <select name="id_cliente" id="id_cliente" class="form-control" autofocus>
+                <label for="id_produto">Produto:</label>
+                <select name="id_produto" id="id_produto" class="form-control" autofocus>
                     <option value=""></option>
-                    {% for cliente in listaClientes: %}
-                    <option value="{{ cliente[0] }}" name>{{ cliente[1] }}</option>
+                    {% for produto in listaProdutos: %}
+                    <option value="{{ produto[0] }}" name>{{ produto[1] }}</option>
                     {% endfor %}
                 </select>
+            </div>
+
+            <div class="row">
+                <div class="col-md-1 mb-2">
+                    <label for="">Quantidade:</label>
+                    <input value="{{ pedido.quantidade}}" type="number" name="quantidade" id="quantidade" class="form-control" placeholder="">
+                </div>
+            </div>
+
+            <div class="col-md-2 mb-2">
+                <label for="valor">Valor:</label>
+                <input value="" type="text" name="valor" id="valor" class="form-control" autofocus>
             </div>
 
             <div class="col-md-10 mb-2">
@@ -55,11 +52,7 @@
                 <input value="" type="text" name="observacao" id="observacao" class="form-control" autofocus>
             </div>
 
-
-        </div>
-        <br>
-
-        <button type="submit" class="btn btn-primary"><a id="salvaPedidoDB"><i
+        <button type="submit" class="btn btn-primary"><a id="salvaPedidoProdutoDB"><i
                     class="fa fa-fw fa-save"></i>Salvar</a></button>
     </form>
 
@@ -71,15 +64,15 @@
     <script>
         $SCRIPT_ROOT = {{ request.script_root | tojson | safe }}; // pega a url da barra de endereço
 
-        $('#addPedido').submit(function (e) {
+        $('#addProduto').submit(function (e) {
             e.preventDefault(); // parar o envio para poder fazer manualmente
-            var form = $('#addPedido')[0]; // captura o form
+            var form = $('#addProduto')[0]; // captura o form
             var data = new FormData(form); // cria o FormData {Object}
 
             $.ajax({
                 type: "POST",
                 enctype: 'multipart/form-data',
-                url: "{{url_for('pedido.addPedido')}}",
+                url: "{{url_for('pedido.addProduto')}}",
                 data: data,
                 processData: false,
                 contentType: false,
@@ -115,14 +108,14 @@
         })
 
         // incluir aqui a opção para editar
-        $('#editPedido').submit(function (e) {
+        $('#editProduto').submit(function (e) {
             e.preventDefault(); // parar o envio para poder fazer manualmente
-            var form = $('#editPedido')[0]; // captura o form
+            var form = $('#editProduto')[0]; // captura o form
             var data = new FormData(form); // cria o FormData {Object}
             $.ajax({
                 type: "POST",
                 enctype: 'multipart/form-data',
-                url: "{{url_for('pedido.editPedido')}}",
+                url: "{{url_for('pedido.editProduto')}}",
                 data: data,
                 processData: false, // impedir que o jQuery tranforma a "data" em querystring
                 contentType: false, // desabilitar o cabeçalho "Content-Type"
