@@ -1,6 +1,6 @@
 {% extends "modelo.html"%}
 
-{% block title %} FormListaPedidos {% endblock %}
+{% block title %} FormListaProdutos {% endblock %}
 
 
 {% block style %}
@@ -13,18 +13,18 @@
 {% block content %}
 {{super()}}
 
-<form action="{{ url_for('pedido.formPedido') }}" method="post">
-    <button type="submit" class="novo">Novo Pedido</button>
-     <h1>Lista Pedidos </h1>
+<form action="{{ url_for('pedido.formAddProduto') }}" method="post">
+    <button type="submit" class="novo">Adicionar Produto</button>
+     <h1>Lista Produtos </h1>
     <table border=2 class="listas">
         <thead class="thead-dark">
             <tr>
-                <td scope="col"> # </td>
-                <td scope="col"> Data/hora </td>
-                <td scope="col"> Cliente </td>
+                <td scope="col"> ID Pedido </td>
+                <td scope="col"> ID Produto </td>
+                <td scope="col"> Qtd </td>
+                <td scope="col"> Valor </td>
+                <td scope="col"> Imagem </td>
                 <td scope="col"> Observação </td>
-                <td scope="col"> Adicionar Produtos </td>
-                <td scope="col"> Listar Produtos </td>
                 <td scope="col"> Editar </td>
                 <td scope="col"> Excluir </td>
             </tr>
@@ -37,31 +37,21 @@
                 <td> {{ row[1] }}</td>
                 <td> {{ row[2] }}</td>
                 <td> {{ row[3] }}</td>
+                <td><img src='{{ row[5] }}' width='50'></td>
+                <td> {{ row[4] }}</td>
 
                 <td> 
-                    <form action='{{ url_for('pedido.formAddProduto') }}' method='POST' name='formAddProduto'>
+                    <form action='{{ url_for('pedido.formEditProduto') }}' method='POST' name='editProduto'>
                         <input type='hidden' name='id_pedido' value='{{ row[0] }}'>
-                        <button type='submit' name='formAddProduto'><i class='fa fa-fw fa-plus'></i></button>
-                    </form>
-                </td>
-
-                <td> 
-                    <form action='{{ url_for('pedido.formListaProdutos') }}' method='POST' name='formListaProduto'>
-                        <input type='hidden' name='id_pedido' value='{{ row[0] }}'>
-                        <button type='submit' name='formListaProduto'><i class='fa fa-fw fa-bars'></i></button>
-                    </form>
-                </td>
-
-                <td> 
-                    <form action='{{ url_for('pedido.formEditPedido') }}' method='POST' name='editPedido'>
-                        <input type='hidden' name='id_pedido' value='{{ row[0] }}'>
-                        <button type='submit' name='formEditPedido'><i class='fa fa-fw fa-edit'></i></button>
+                        <input type='hidden' name='id_produto' value='{{ row[1] }}'>
+                        <button type='submit' name='formEditProduto'><i class='fa fa-fw fa-edit'></i></button>
                     </form>
                 </td>
                 <td>
-                    <form method='POST' name='deletePedido' id='deletePedido'>
+                    <form method='POST' name='deleteProduto' id='deleteProduto'>
                         <input type='hidden' name='id_pedido' value='{{ row[0] }}'>
-                        <button type='submit' name='formDeletePedido'><i class='fa fa-fw fa-trash'></i></button>
+                        <input type='hidden' name='id_produto' value='{{ row[1] }}'>
+                        <button type='submit' name='formDeleteProduto'><i class='fa fa-fw fa-trash'></i></button>
                     </form>
                 </td>
             </tr>
@@ -77,20 +67,20 @@
 {% block js %}
 <script>
     $SCRIPT_ROOT = {{request.script_root | tojson | safe}}; // pega a url da barra de endereço
-    $("form[name='deletePedido']").submit(function (e) {
+    $("form[name='deleteProduto']").submit(function (e) {
         e.preventDefault(); // parar o envio para poder fazer manualmente
         swal({ // abre um popup pedindo a confirmação do usuário
             title: "",
-            text: "Deseja realmente excluir o pedido" + $(e.target)[0][0].value,
+            text: "Deseja realmente excluir o produto" + $(e.target)[1][1].value,
             type: "warning", showCancelButton: true, confirmButtonClass: "btn-danger", confirmButtonText: "Sim", cancelButtonText: 'Cancelar', closeOnConfirm: false
         },
             function () {
-                deletarPedido($(e.target)[0][0].value);// Retorna o valor que está no id do pedido escolhido);
+                deletarProduto($(e.target)[1][1].value);// Retorna o valor que está no id do pedido escolhido);
             });
     })
-    function deletarPedido(idPedido) {
-        $.post($SCRIPT_ROOT + "{{ url_for('pedido.deletePedido') }}", {
-            id_pedido: idPedido
+    function deletarProduto(idProduto) {
+        $.post($SCRIPT_ROOT + "{{ url_for('pedido.deleteProduto') }}", {
+            id_produto: idProduto
         }, function (data) {
             if (!data.erro) {
                 swal({

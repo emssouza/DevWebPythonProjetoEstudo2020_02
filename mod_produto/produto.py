@@ -62,6 +62,7 @@ def addProduto():
 @validaSessao
 def editProduto():
     _msg = ""
+    funcoes = Funcoes()
     try:
         produto = Produtos()
         produto.id_produto = request.form['id_produto']
@@ -88,6 +89,7 @@ def editProduto():
 @bp_produto.route('/deleteProduto', methods=['POST'])
 @validaSessao
 def deleteProduto():
+    funcoes = Funcoes()
     _msg = ""
     try:
         produto = Produtos()
@@ -95,7 +97,7 @@ def deleteProduto():
         _msg = produto.delete()
 
         #log
-        log = _msg + "| Produto: " + request.form['descricao']+ " |Usuário:" + session['usuario']+ "|"
+        log = _msg + "| Produto: " + request.form['id_produto']+ " |Usuário:" + session['usuario']+ "|"
         funcoes.logInfo(log)
 
         return jsonify(erro=False, mensagem=_msg)

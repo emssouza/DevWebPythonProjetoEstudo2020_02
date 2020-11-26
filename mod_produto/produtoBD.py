@@ -78,6 +78,7 @@ class Produtos(object):
         c = None
         try:
             banco = Banco()
+            print(self.imagem)
             c = banco.conexao.cursor()
             _sql = "update tb_produtos set descricao=%s,valor=%s,imagem=%s where id_produto = %s"
             _sql_data = (self.descricao, self.valor, self.imagem, self.id_produto,)
